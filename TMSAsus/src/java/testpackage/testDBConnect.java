@@ -51,7 +51,7 @@ public class testDBConnect extends HttpServlet {
                         out.println(resultSet.getString(i)+"  ");
                     }
                 }
-
+                DBConnect.closeConnection();
             } catch (Exception e) {
                 e.printStackTrace();
             }
