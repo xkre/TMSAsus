@@ -18,15 +18,20 @@ public class DBConnect {
 
     final static String serverName = "localhost";
     final static String databaseName = "tmsasus";
-
-    public static Connection getConnection() {
+    
+    static String driver;
+    static String url;
+    
+    static Connection con;
+    
+    public static Connection LoadConnection() {
         String username = "root"; // Username/password required
         String password = ""; // for MSSQL SERVER.
         DriverUtilities.loadDrivers();
-        String driver = DriverUtilities.getDriver(DriverUtilities.MYSQL);
-        String url = DriverUtilities.makeURL(serverName, databaseName, DriverUtilities.MYSQL);
+        driver = DriverUtilities.getDriver(DriverUtilities.MYSQL);
+        url = DriverUtilities.makeURL(serverName, databaseName, DriverUtilities.MYSQL);
 
-        Connection con = null;
+        con = null;
         try {
             Class.forName(driver);
 
