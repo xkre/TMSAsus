@@ -24,7 +24,7 @@ public class DBConnect {
     
     static Connection con;
     
-    public static Connection LoadConnection() {
+    public static void loadConnection() {
         String username = "root"; // Username/password required
         String password = ""; // for MSSQL SERVER.
         DriverUtilities.loadDrivers();
@@ -36,23 +36,15 @@ public class DBConnect {
             Class.forName(driver);
 
             con = DriverManager.getConnection(url, username, password);
-// PreparedStatement updateCity = con.prepareStatement(     
-//         "DELETE FROM penyelia WHERE nostaff=? OR nostaff=?");
- /*
-             updateCity.setString(1, "M002");
-             updateCity.executeUpdate();
-             updateCity.setString(1, "M003");
-             updateCity.executeUpdate();
-             */
-// updateCity.setString(1, "S008");
-// updateCity.setString(2, "S009");
-// updateCity.executeUpdate();
-// updateCity.close();
-// 	con.close();
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+    
+    public static Connection getConnection(){
         return con;
     }
-
 }
+
+  

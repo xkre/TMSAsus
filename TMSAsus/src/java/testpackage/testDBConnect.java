@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//dummy driver to test function of DBConnect
 package testpackage;
 
 import java.io.IOException;
@@ -41,7 +37,10 @@ public class testDBConnect extends HttpServlet {
             out.println("<title>Servlet testDBConnect</title>");
             out.println("</head>");
             out.println("<body>");
+            DBConnect.loadConnection();
             Connection a = DBConnect.getConnection();
+
+            out.println("<h1>Servlet testDBConnect at " + request.getContextPath() + "</h1>");
 
             try {
                 Statement statement = a.createStatement();
@@ -51,17 +50,15 @@ public class testDBConnect extends HttpServlet {
                 ResultSetMetaData data = resultSet.getMetaData();
                 String[] theData = new String[50];
                 int columnCount = data.getColumnCount();
-                for (int i = 0; i < columnCount; i++) {
-                    theData[i] = resultSet.getString(i);
-                    out.println(theData[i]);
+                while (resultSet.next()) {
+                    for (int i = 1; i < columnCount; i++) {
+                        out.println(resultSet.getString(i)+"  ");
+                    }
                 }
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            out.println("<h1>Servlet testDBConnect at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
