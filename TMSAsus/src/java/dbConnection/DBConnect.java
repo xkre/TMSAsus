@@ -45,6 +45,19 @@ public class DBConnect {
     public static Connection getConnection(){
         return con;
     }
+    
+    public static ResultSet doQuery(String query){
+        ResultSet result = null;
+        try{
+            PreparedStatement a = con.prepareStatement(query);
+            result = a.executeQuery();
+        }
+        catch(SQLException sqle) {
+            System.err.println("Error connecting: " + sqle);
+        }
+        
+        return result;
+    }
 }
 
   

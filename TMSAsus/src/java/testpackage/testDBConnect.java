@@ -43,13 +43,9 @@ public class testDBConnect extends HttpServlet {
             out.println("<h1>Servlet testDBConnect at " + request.getContextPath() + "</h1>");
 
             try {
-                Statement statement = a.createStatement();
-                ResultSet resultSet;
-                resultSet = statement.executeQuery("Select * from staffinfo");
-
-                ResultSetMetaData data = resultSet.getMetaData();
-                String[] theData = new String[50];
-                int columnCount = data.getColumnCount();
+                ResultSet resultSet = DBConnect.doQuery("Select * from staffinfo");
+                
+                int columnCount = resultSet.getMetaData().getColumnCount();
                 while (resultSet.next()) {
                     for (int i = 1; i < columnCount; i++) {
                         out.println(resultSet.getString(i)+"  ");
