@@ -42,6 +42,15 @@ public class DBConnect {
         }
     }
     
+    public static void closeConnection(){
+        try{
+            con.close();
+        }
+        catch(SQLException sqle) {
+            System.err.println("Error connecting: " + sqle);
+        }
+    }
+    
     public static Connection getConnection(){
         return con;
     }
