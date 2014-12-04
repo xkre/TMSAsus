@@ -13,10 +13,10 @@
     <link href="../css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="../css/sb-admin-2.css" rel="stylesheet">
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link href="../css/datepicker.css" rel="stylesheet">
-    <script src="../js/bootstrap-datepicker.js"></script>
-    <script src="../js/jquery.js"></script>
+    <link href="../css/datepicker.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    
+    
 </head>
 <body>
 
@@ -71,9 +71,4 @@
                             </div>
                             <!-- /input-group -->
                         </li>                     
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jqBootstrapValidation.js"></script>
-    <script src="../js/plugins/metisMenu/metisMenu.min.js"></script>
-    <script src="../js/sb-admin-2.js"></script>
-    <script src="../js/validator.js"></script>
-
+ 

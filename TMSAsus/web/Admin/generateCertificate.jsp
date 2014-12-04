@@ -1,27 +1,13 @@
 <%@ include file="../Admin/AdminMainPage.jsp" %>
-
-
-                        <li>
-                            <a href="manageCourse.jsp"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a>
-                        </li>
-                        <li>
-                            <a href="generateCertificate.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a>
-                        </li>
-                        <li>
-                            <a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a>
-                        </li>
-                        <li>
-                            <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
+            <li><a href="manageCourse.jsp"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
+            <li><a href="generateCertificate.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
+            <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
+            <li><a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a></li>
+            <li><a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
+            </ul>
             </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+        </div>
+    </nav>
 
         <!-- Page Content -->
         <div id="page-wrapper">
