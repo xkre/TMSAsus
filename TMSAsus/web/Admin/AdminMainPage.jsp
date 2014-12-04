@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Blank </title>
+<title>Admin </title>
 <head>
 
     <meta charset="utf-8">
@@ -8,13 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Hi Admin</title>
+    
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="../css/sb-admin-2.css" rel="stylesheet">
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
+
+    <link href="../css/datepicker.css" rel="stylesheet">
+    <script src="../js/bootstrap-datepicker.js"></script>
+    <script src="../js/jquery.js"></script>
 </head>
 <body>
 
@@ -68,20 +70,10 @@
                                 </span>
                             </div>
                             <!-- /input-group -->
-                        </li>
-                        
-                     
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
+                        </li>                     
     <script src="../js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../js/jqBootstrapValidation.js"></script>
     <script src="../js/plugins/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
     <script src="../js/sb-admin-2.js"></script>
+    <script src="../js/validator.js"></script>
 
