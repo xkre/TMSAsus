@@ -30,60 +30,68 @@
                   <div class="row clearfix">
                       <div class="col-md-12 column">
                           <h3 class="page-header">Create New Course</h3>
-                          <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-2 control-label">Course Code</label>
-                                <div class="col-sm-5"><input type="email" class="form-control" id="courseCode" />
+                          <form class="form-horizontal" role="myFormCreate" data-toggle="validator">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Course Code</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Course Name</label>
-                                <div class="col-sm-5"><input type="password" class="form-control" id="courseName" />
+                                <div class="form-group"> 
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Name</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Course Tutor</label>
-                                <div class="col-sm-5"><input type="password" class="form-control" id="courseTutor" />
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Tutor</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Venue</label>
-                                <div class="col-sm-5"><input type="password" class="form-control" id="Venue" />
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Venue</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Course Category</label>
-                                <div class="col-sm-5">
-                                    <select class="form-control">
-                                        <option>Category A</option>
-                                        <option>Category b</option>
-                                        <option>Category c</option>
-                                        <option>Category d</option>
-                                        <option>Category e</option>
-                                    </select>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Category</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control">
+                                            <option>Category A</option>
+                                            <option>Category b</option>
+                                            <option>Category c</option>
+                                            <option>Category d</option>
+                                            <option>Category e</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Start Date</label>
-                                <div class="col-sm-5">
-                                    <div class="input-append date input-group" id="dp1" data-date=" " data-date-format="dd-mm-yyyy">
-                                        <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                            <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                            </span>
-                            </div></div></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">End Date</label>
-                                <div class="col-sm-5">
-                                    <div class="input-append date input-group" id="dp2" data-date=" " data-date-format="dd-mm-yyyy">
-                                        <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                            <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                            </span>
-                                    </div> </div></div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Create Course</button>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Start Date</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-append date input-group" id="dp1" data-date=" " data-date-format="dd-mm-yyyy">
+                                            <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
+                                                <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
+                                                </span>
+                                </div></div></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">End Date</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-append date input-group" id="dp2" data-date=" " data-date-format="dd-mm-yyyy">
+                                            <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
+                                                <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
+                                                </span>
+                                        </div> </div></div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Create Course</button>
+                                    </div>
                                 </div>
-                            </div>
             </form></div></div></div>
         </div>
                 
@@ -122,72 +130,79 @@
         </div>
         
         <!-- /.UPDATE COURSE -->    
-        <div class="targetDiv" id="div2">
+        <div class="targetDiv" id="div2">v 
             <div class="container">
               <div class="row clearfix">
                   <div class="col-md-8 column">
                       <h3 class="page-header">Update Course</h3>
-                      <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Course Code</label>
-                            <div class="col-sm-5"><input type="email" class="form-control" id="courseCode" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Course Name</label>
-                            <div class="col-sm-5"><input type="password" class="form-control" id="courseName" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Course Tutor</label>
-                            <div class="col-sm-5"><input type="password" class="form-control" id="courseTutor" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Venue</label>
-                            <div class="col-sm-5"><input type="password" class="form-control" id="Venue" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">Course Category</label>
-                            <div class="col-sm-5">
-                                <select class="form-control">
-                                    <option>Category A</option>
-                                    <option>Category b</option>
-                                    <option>Category c</option>
-                                    <option>Category d</option>
-                                    <option>Category e</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                <label class="col-sm-2 control-label">Start Date</label>
-                                <div class="col-sm-5">
-                                    <div class="input-append date input-group" id="dp3" data-date=" " data-date-format="dd-mm-yyyy">
-                                        <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                            <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                            </span>
-                            </div></div></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">End Date</label>
-                                <div class="col-sm-5">
-                                    <div class="input-append date input-group" id="dp4" data-date=" " data-date-format="dd-mm-yyyy">
-                                        <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                            <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                            </span>
-                                    </div> </div></div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Update Course</button>
-                            </div>
-                        </div>
-        </form></div></div></div>
+                      <form class="form-horizontal" role="myFormUpdate" data-toggle="validator">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Course Code</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group"> 
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Name</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Tutor</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Venue</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">Course Category</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control">
+                                            <option>Category A</option>
+                                            <option>Category b</option>
+                                            <option>Category c</option>
+                                            <option>Category d</option>
+                                            <option>Category e</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Start Date</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-append date input-group" id="dp1" data-date=" " data-date-format="dd-mm-yyyy">
+                                            <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
+                                                <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
+                                                </span>
+                                </div></div></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">End Date</label>
+                                    <div class="col-sm-5">
+                                        <div class="input-append date input-group" id="dp2" data-date=" " data-date-format="dd-mm-yyyy">
+                                            <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
+                                                <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
+                                                </span>
+                                        </div> </div></div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">Create Course</button>
+                                    </div>
+                                </div>
+            </form></div></div></div>
         </div> 
         
         
     </div></div></div></div></div></div></div>
 
-    
   <!-- /.DELETE COURSE -->
   <div id="deleteCourse" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
@@ -207,8 +222,9 @@
 </body>
 <script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $('#form').validator()
-</script>      
+    $('#myFormUpdate').validator()
+    $('#myFormCreate').validator()
+</script>       
 <script type="text/javascript">
    $(document).ready(function(){
        $('#dp1').datepicker();
@@ -231,5 +247,4 @@
         });
     });
 </script>
-<a href=""></a>
 <jsp:include page="footer.jsp"/>
