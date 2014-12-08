@@ -122,8 +122,8 @@
                             <td>8.00</td>
                             <td>10.00</td>
                             <td>Entah</td>
-                            <td class="text-center"><a id="updateCourse" class="glyphicon glyphicon-refresh" target="1"></a></td>
-                            <td class="text-center"><a class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteCourse"></a></td>
+                            <td class="text-center"><i id="updateCourse" class="glyphicon glyphicon-refresh" target="1"></i></td>
+                            <td class="text-center"><i class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteCourse"></i></td>
                             
                         </tr></tbody>
                 </table>
@@ -179,7 +179,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Start Date</label>
                                     <div class="col-sm-5">
-                                        <div class="input-append date input-group" id="dp1" data-date=" " data-date-format="dd-mm-yyyy">
+                                        <div class="input-append date input-group" id="dp3" data-date=" " data-date-format="dd-mm-yyyy">
                                             <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
                                                 <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
                                                 </span>
@@ -187,7 +187,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">End Date</label>
                                     <div class="col-sm-5">
-                                        <div class="input-append date input-group" id="dp2" data-date=" " data-date-format="dd-mm-yyyy">
+                                        <div class="input-append date input-group" id="dp4" data-date=" " data-date-format="dd-mm-yyyy">
                                             <input name="startDate" class="form-control input-sm" value="" type="text" data-required="true"/>
                                                 <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
                                                 </span>
