@@ -1,3 +1,8 @@
+<%@page import="java.sql.Connection"%>
+<%@page import="dbConnection.DBConnect"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <html lang="en">
 <title>Admin </title>
@@ -17,7 +22,12 @@
     <link href="../css/datepicker.css" rel="stylesheet" type="text/css"/>
     <script src="../js/jquery.js" type="text/javascript"></script>
     
-    
+    <%  DBConnect myDBConnection = new DBConnect();
+        myDBConnection.loadConnection();
+        Connection myConnection = myDBConnection.getConnection();
+        Statement stmt = myConnection.createStatement();
+
+    %>
 </head>
 <body>
 
