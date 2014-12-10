@@ -50,7 +50,8 @@
                                         category = null,
                                         objective = null,
                                         courseStatus = null,
-                                        courseID = null;
+                                        courseID = null,
+                                        temp = null;
                                 int count = 1, staffNum = 0;
                                 Date startDate = new Date(0);
                                 Date endDate = new Date(0);
@@ -71,8 +72,14 @@
                                     courseTutor  = resultSet.getString("courseTutor");
                                     startDate    = resultSet.getDate("startDate");
                                     endDate      = resultSet.getDate("endDate");
+                                    
+                                    if(courseStatus.equals("Done"))
+                                    temp = "success";
+                                
+                                    else 
+                                    temp = "active";
                             %>
-                            <tr id="<%= courseID %>" class="success">    
+                            <tr id="<%= courseID %>" class="<%= temp %>">    
                                 <td><%= count%></td>
                                 <td><%= courseCode %></td>
                                 <td><%= courseName %></td>

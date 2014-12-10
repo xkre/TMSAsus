@@ -1,4 +1,6 @@
-<jsp:directive.include file="AdminMainPage.jsp" />
+<!-- -->
+<%@ include file="../Admin/AdminMainPage.jsp" %>
+
             <li><a href="manageCourse.jsp" ><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -83,7 +85,12 @@
                                     if(oldPasswordForm.equals(oldPaswordData)){
                                         out.println("oldPasswordForm :" + oldPasswordForm +"\noldPaswordData: " +oldPaswordData );
                                         template = "UPDATE logininfo SET password='"+ newPassword +"' WHERE staffID='" + adminID +"'";
-                                        stmt.executeUpdate(template);
+                                        try{
+                                            stmt.executeUpdate(template);
+                                        }
+                                        catch(SQLException sqle) {
+                                            System.err.println("Error connecting: " + sqle);
+                                        }
                                     }
                                     
                                     else{ %>

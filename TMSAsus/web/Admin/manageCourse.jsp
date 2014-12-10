@@ -2,7 +2,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="dbConnection.DBConnect"%>
-<jsp:directive.include file="AdminMainPage.jsp" />
+<%@ include file="../Admin/AdminMainPage.jsp" %>
             <li><a href="manageCourse.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -140,7 +140,6 @@
                         </div>
             </form>
             <%
-                
                 String courseCodeInput = null,
                         courseNameInput = null,
                         courseTutorInput = null,
@@ -183,19 +182,15 @@
                        + "organizer, courseStatus, staffNum, courseTutor) "
                        + "VALUES ('"+ courseCodeInput +"', '"+ courseNameInput +"', "
                        + "'"+ startDateInput +"', '"+ endDateInput +"', '"+ venueInput +"', '"+ objectiveInput +"', '"+ courseCategoryInput +"', '"+ durationInput +"', "
-                       + "'"+ organizerInput +"', '"+ courseStatusInput +"', '"+ staffNumberInput +"', '"+ courseTutorInput +"')";         
-                       
+                       + "'"+ organizerInput +"', '"+ courseStatusInput +"', '"+ staffNumberInput +"', '"+ courseTutorInput +"')";
                 
-                        try{
-                            stmt.executeUpdate(template);
-                        }
-                        catch(SQLException sqle) {
-                            System.err.println("Error connecting: " + sqle);
-
-                        }
-                    }  
-                
-
+                    try{
+                        stmt.executeUpdate(template);
+                    }
+                    catch(SQLException sqle) {
+                        System.err.println("Error connecting: " + sqle);
+                    }
+                }
             %>
             </div></div></div>
         </div>         

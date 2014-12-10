@@ -1,4 +1,4 @@
-<jsp:directive.include file="AdminMainPage.jsp" />
+<%@ include file="../Admin/AdminMainPage.jsp" %>
             <li><a href="manageCourse.jsp"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
