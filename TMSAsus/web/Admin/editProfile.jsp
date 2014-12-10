@@ -11,7 +11,8 @@
         </div>
     </nav>
 
-<!-- Page Content -->
+
+    <!-- Page Content -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -70,7 +71,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button name="buttonUpdate" type="submit" class="btn btn-primary" value="true">Update</button>
+                            <button id="updateToast" name="buttonUpdate" type="submit" class="btn btn-primary" value="true">Update</button>
                             <%
                                 buttonUpdate = Boolean.parseBoolean(request.getParameter("buttonUpdate"));
                                 oldPasswordForm = request.getParameter("oldPassword");
@@ -83,10 +84,13 @@
                                     }
                                     
                                     if(oldPasswordForm.equals(oldPaswordData)){
-                                        out.println("oldPasswordForm :" + oldPasswordForm +"\noldPaswordData: " +oldPaswordData );
                                         template = "UPDATE logininfo SET password='"+ newPassword +"' WHERE staffID='" + adminID +"'";
                                         try{
-                                            stmt.executeUpdate(template);
+                                            stmt.executeUpdate(template); %>
+                                            <script type="text/javascript">
+                                                toastr.success("Success","Information Updated" );    
+                                             </script>
+                                        <%    
                                         }
                                         catch(SQLException sqle) {
                                             System.err.println("Error connecting: " + sqle);
@@ -94,6 +98,9 @@
                                     }
                                     
                                     else{ %>
+                                        <script type="text/javascript">
+                                            toastr.warning("Failed","Old Password doesnt match" );    
+                                        </script>
                                         <span class="help-block with-errors" style="color:red">Old Password did not match</span>
                                     <%}
                                 }  
@@ -115,6 +122,5 @@
        $('#dp3').datepicker();
    });
 </script>
-
 </body>
 <jsp:include page="footer.jsp"/>

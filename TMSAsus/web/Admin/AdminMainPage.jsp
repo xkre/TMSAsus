@@ -22,6 +22,13 @@
     <link href="../css/datepicker.css" rel="stylesheet" type="text/css"/>
     <script src="../js/jquery.js" type="text/javascript"></script>
     
+    <!-- Toastr -->
+    <script src="../js/toastr.js" type="text/javascript"></script>
+    <link href="../css/toastr.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        toastr.options.progressBar = true; 
+        toastr.options.closeButton = true;  
+    </script>
     <%  
         DBConnect myDBConnection = new DBConnect();
         myDBConnection.loadConnection();
