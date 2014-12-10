@@ -1,4 +1,4 @@
-<%@ include file="../Admin/AdminMainPage.jsp" %>
+<jsp:directive.include file="AdminMainPage.jsp" />
             <li><a href="manageCourse.jsp"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -26,14 +26,55 @@
                                 <th>Course Code</th>
                                 <th>Course Name</th>
                                 <th>Attandence</th>
+                                <th>Action</th>
                             </tr></thead>
                         <tbody>
-                            <tr class="success">
-                                <td>1</td>
-                                <td>SCSJ1012</td>
-                                <td>Programming Techinique I</td>
-                                <td>17/30</td>
-                            </tr></tbody>
+                            <%
+                               ResultSet resultSet;
+                               String template = null,
+                                      courseCode = null,
+                                      courseName = null,
+                                      courseID = null,
+                                      temp = null,
+                                      courseStatus = null;
+                                int total = 0,
+                                    attentStudent = 0;
+                                int count = 1;
+                               
+                               template = "SELECT * FROM courseinfo";
+                               resultSet = DBConnect.doQuery(template);
+                               while (resultSet.next()){
+                                   courseID     = resultSet.getString("courseID");
+                                   courseCode   = resultSet.getString("courseCode");
+                                   courseName   = resultSet.getString("courseName");
+                                   courseStatus   = resultSet.getString("courseStatus");
+                                   
+                               template = "SELECT SUM(attendanceStatus),COUNT(attendanceStatus) FROM participationinfo WHERE courseID=" + courseID;
+                               resultSet = DBConnect.doQuery(template);
+                               while (resultSet.next()){
+                                   int a = resultSet.getInt(1);
+                                   int b = resultSet.getInt(2);
+                                   attentStudent += a;
+                                   total += b;
+                                }
+                                
+                                if(courseStatus.equals("done"))
+                                    temp = "success";
+                                
+                                else 
+                                    temp = "active";
+                            %>  
+                                <tr class="<%= temp %>">
+                                    <td><%= count %></td>
+                                    <td><%= courseCode %></td>
+                                    <td><%= courseName %></td>
+                                    <td><%= attentStudent %>/<%= total %></td>
+                                    <td class="text-center">
+                                        <a href="" class="glyphicon glyphicon-forward" data-toggle="tooltip" data-placement="left" title="generate report"></a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
                 </table>
 		</div>
                 </div>

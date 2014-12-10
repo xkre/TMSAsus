@@ -1,5 +1,4 @@
-
-<%@ include file="../Admin/AdminMainPage.jsp" %>
+<jsp:directive.include file="AdminMainPage.jsp" />
             <li><a href="manageCourse.jsp" ><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -18,7 +17,7 @@
                 <h1 class="page-header">Edit Profile</h1>
                 <form class="form-horizontal" role="form" data-toggle="validator">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label" >Username</label>
+                        <label class="col-sm-2 control-label" >Username</label>
                         <div class="col-sm-10">
                             <%  
                                String adminID = null,
@@ -42,7 +41,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <label class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
                             <%  
                                 template = "SELECT * FROM staffinfo WHERE staffID='" + adminID +"'";
@@ -56,13 +55,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Old Password</label>
+                        <label class="col-sm-2 control-label">Old Password</label>
                         <div class="col-sm-10">
                            <input name="oldPassword" type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">New Password</label>
+                        <label class="col-sm-2 control-label">New Password</label>
                         <div class="col-sm-10">
                            <input name="newPassword" type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
                         </div>
@@ -102,12 +101,12 @@
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $('#form').validator()
+    $('#form').validator();
 </script>      
 <script type="text/javascript">
    $(document).ready(function(){
        $('#dp3').datepicker();
-   })
+   });
 </script>
 
 </body>

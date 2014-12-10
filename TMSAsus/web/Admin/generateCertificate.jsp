@@ -1,4 +1,5 @@
-<%@ include file="../Admin/AdminMainPage.jsp" %>
+<%@page import="java.sql.Date"%>
+<jsp:directive.include file="AdminMainPage.jsp" />
             <li><a href="manageCourse.jsp"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -29,20 +30,65 @@
                                 <th>Venue</th>
                                 <th>Start</th>
                                 <th>End</th>
+                                <th>Duration</th>
+                                <th>Organizer</th>
                                 <th>Category</th>
+                                <th>Course Status</th>
+                                <th>No Staff</th>
                                 <th>Generate</th>
                             </tr></thead>
                         <tbody>
-                            <tr class="success">
-                                <td>1</td>
-                                <td>SCSJ1012</td>
-                                <td>Programming Techinique I</td>
-                                <td>Dr Dayang Nurhayati</td>
-                                <td>Bilik Kuliah I</td>
-                                <td>8.00</td>
-                                <td>10.00</td>
-                                <td>Entah</td>
-                                <td class="text-center"><a href="" class="glyphicon glyphicon-forward" ></a></td>
+                            <%                            
+                                ResultSet resultSet;
+                                String  template = null,
+                                        courseCode = null,
+                                        courseName = null,
+                                        courseTutor = null,
+                                        venue = null,
+                                        duration = null,
+                                        organizer = null,
+                                        category = null,
+                                        objective = null,
+                                        courseStatus = null,
+                                        courseID = null;
+                                int count = 1, staffNum = 0;
+                                Date startDate = new Date(0);
+                                Date endDate = new Date(0);
+                                        
+                                template = "SELECT * FROM courseinfo";
+                                resultSet = DBConnect.doQuery(template);
+                                while (resultSet.next()){
+                                    courseID     = resultSet.getString("courseID");
+                                    courseCode   = resultSet.getString("courseCode");
+                                    courseName   = resultSet.getString("courseName");
+                                    venue        = resultSet.getString("venue");
+                                    objective    = resultSet.getString("objectives");
+                                    category     = resultSet.getString("category");
+                                    duration     = resultSet.getString("duration");
+                                    organizer    = resultSet.getString("organizer");
+                                    courseStatus = resultSet.getString("courseStatus");
+                                    staffNum     = resultSet.getInt("staffNum");
+                                    courseTutor  = resultSet.getString("courseTutor");
+                                    startDate    = resultSet.getDate("startDate");
+                                    endDate      = resultSet.getDate("endDate");
+                            %>
+                            <tr id="<%= courseID %>" class="success">    
+                                <td><%= count%></td>
+                                <td><%= courseCode %></td>
+                                <td><%= courseName %></td>
+                                <td><%= courseTutor %></td>
+                                <td><%= venue %></td>
+                                <td><%= startDate %></td>
+                                <td><%= endDate %></td>
+                                <td><%= duration %></td>
+                                <td><%= organizer %></td>
+                                <td><%= category %></td>
+                                <td><%= courseStatus %></td>
+                                <td><%= staffNum %></td>
+                                <td class="text-center"><i href="" class="glyphicon glyphicon-forward" data-toggle="tooltip" data-placement="left" title="generate certificate"></i></td>
+                                <%  count++;
+                                    }
+                                %>
                             </tr></tbody>
                 </table>
 		</div>

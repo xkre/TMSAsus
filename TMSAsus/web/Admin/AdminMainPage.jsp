@@ -22,11 +22,11 @@
     <link href="../css/datepicker.css" rel="stylesheet" type="text/css"/>
     <script src="../js/jquery.js" type="text/javascript"></script>
     
-    <%  DBConnect myDBConnection = new DBConnect();
+    <%  
+        DBConnect myDBConnection = new DBConnect();
         myDBConnection.loadConnection();
         Connection myConnection = myDBConnection.getConnection();
         Statement stmt = myConnection.createStatement();
-
     %>
 </head>
 <body>
