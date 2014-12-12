@@ -71,6 +71,22 @@ public class DBConnect {
         
         return result;
     }
+    
+    public static ResultSet doQuery (PreparedStatement statement){
+        ResultSet result = null;
+        try{
+            result = statement.executeQuery();
+        }
+        catch(SQLException sqle) {
+            System.err.println("Error connecting: " + sqle);
+            System.err.println("Punca:  " + sqle.toString());
+            System.err.println("SQLState:  " + sqle.getSQLState());
+            System.err.println("Message:  " + sqle.getMessage());
+            System.err.println("Vendor:  " + sqle.getErrorCode());
+        }
+        
+        return result;
+    }
 }
 
   

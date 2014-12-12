@@ -1,3 +1,4 @@
+<%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
                         <li>
                             <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
@@ -26,6 +27,21 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">View Status</h1>
                         
+                        <%
+                    int staffID = 3;
+                    DBConnect.loadConnection();
+                    Connection con = DBConnect.getConnection();
+                    String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID=6";
+                    PreparedStatement statement = con.prepareStatement(query);
+
+//                    statement.setInt(1, 3);
+//                    statement.executeUpdate();
+                    ResultSet result;
+
+                    result = DBConnect.doQuery(statement);
+
+                %>
+                        
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -40,22 +56,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr >
-                                            <td>1</td>
-                                            <td>SCSJ</td>
-                                            <td>Software Enggineering</td>
-                                            <td>14/12/14</td>
-                                            <td>15/12/14</td>
-                                            <td>Approved</td>
-                                        </tr>
-                                        <tr >
-                                            <td>2</td>
-                                            <td>SCSD</td>
-                                            <td>Database</td>
-                                            <td>19/12/14</td>
-                                            <td>20/12/14</td>
-                                            <td>Pending</td>
-                                        </tr>
+                                        <% while (result.next()) {%>
+                                <tr >
+                                    <td><%= result.getString("courseID")%></td>
+                                    <td><%= result.getString("courseCode")%></td>
+                                    <td><%= result.getString("courseName")%></td>
+                                    <td><%= result.getString("startDate")%></td>
+                                    <td><%= result.getString("endDate")%></td>
+                                    <td><%= result.getString("participantStatus")%></td>
+                                    
+                                <%
+                                    }
+                                %>
+                                    
+                                </tr>
                                     </tbody>
                                 </table>
                             </div>

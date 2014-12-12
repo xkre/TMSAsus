@@ -11,17 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dbConnection.*;
-import java.sql.*;
-import java.util.Date;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Akram
  */
-public class loginVerify extends HttpServlet {
+public class applyCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,51 +30,14 @@ public class loginVerify extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        DBConnect.loadConnection();
-        Connection con = DBConnect.getConnection();
-
         try (PrintWriter out = response.getWriter()) {
-
-            String user = null;
-            String pwd = null;
-            String privelage = null;
-
-            boolean loginSuccess = false;
-            HttpSession session = request.getSession(true);
-            if (request.getHeader("referer") == null) {
-                session.invalidate();
-                response.sendRedirect("./login.jsp?error=1");
-            } else if (request.getHeader("referer").contains("login.jsp")) {
-                user = request.getParameter("username");
-                pwd = request.getParameter("password");
-                String query = "SELECT * FROM logininfo WHERE username='"+user+"' AND password='"+pwd+"'";
-                //out.println(query);
-                ResultSet result = DBConnect.doQuery(query);
-                if (!result.next()) {
-                    loginSuccess = false;
-                    response.sendRedirect("./login.jsp?error=2");
-                } else {
-                    loginSuccess = true;
-                    privelage = result.getString("privelage");
-                    //INSERT user info into session
-                    session.setAttribute("staffID", result.getString("staffID"));
-                    session.setAttribute("privelage", privelage);
-                }
-            }
-            if (loginSuccess) {
-                System.out.println("somewhere2");
-                if (privelage.equals("user")) {
-                    response.sendRedirect("./index.html");//mainPage
-                } else if (privelage.equals("admin")) {
-                    response.sendRedirect("./index.html");//mainPage
-                } else {
-                    response.sendRedirect("./index.html");//mainPage
-                }
-            }
-        } catch (SQLException sqle) {
-            System.err.println("Error connecting: " + sqle);
+            /* TODO output your page here. You may use following sample code. */
+            
         }
+    }
+    
+    public void applyCourse(int courseID, HttpServletResponse response){
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

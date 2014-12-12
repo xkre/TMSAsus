@@ -1,3 +1,10 @@
+<%@ page session="true" %>
+<%@page import="java.sql.Connection"%>
+<%@page import="dbConnection.DBConnect"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.PreparedStatement"%>
 <!DOCTYPE html>
 <html lang="en">
 <title>User </title>
