@@ -1,6 +1,5 @@
 <!-- -->
 <%@ include file="../Admin/AdminMainPage.jsp" %>
-
             <li><a href="manageCourse.jsp" ><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -89,14 +88,16 @@
                                             stmt.executeUpdate(template); %>
                                             <script type="text/javascript">
                                                 toastr.success("Success","Information Updated" );    
-                                             </script>
+                                            </script>
                                         <%    
                                         }
-                                        catch(SQLException sqle) {
+                                        catch(SQLException sqle){
                                             System.err.println("Error connecting: " + sqle);
+                                            %><script type="text/javascript">
+                                                toastr.error("Failed","Somethin When wrong, please inform technician");    
+                                            </script><%
                                         }
                                     }
-                                    
                                     else{ %>
                                         <script type="text/javascript">
                                             toastr.warning("Failed","Old Password doesnt match" );    
@@ -111,7 +112,6 @@
                 </form>
         </div>
 </div></div></div>
-
 <script src="../js/jquery.js" type="text/javascript"></script>
 <script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">

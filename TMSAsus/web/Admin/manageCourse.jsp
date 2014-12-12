@@ -186,8 +186,18 @@
                        + "'"+ startDateInput +"', '"+ endDateInput +"', '"+ venueInput +"', '"+ objectiveInput +"', '"+ courseCategoryInput +"', '"+ durationInput +"', "
                        + "'"+ organizerInput +"', '"+ courseStatusInput +"', '"+ staffNumberInput +"', '"+ courseTutorInput +"')";
                 
-                    try{stmt.executeUpdate(template);}
-                    catch(SQLException sqle) {System.err.println("Error connecting: " + sqle);}
+                    try{ 
+                        stmt.executeUpdate(template);%>
+                        <script type="text/javascript">
+                            toastr.success("New course created", "Success");
+                        </script>
+                  <%}
+                    catch(SQLException sqle){
+                        System.err.println("Error connecting: " + sqle);
+                        %><script type="text/javascript">
+                            toastr.error("Failed","Somethin When wrong, please inform technician");    
+                        </script><%
+                    }
                 }
             %>
             </div></div></div>
@@ -228,7 +238,7 @@
                                     courseStatusManageCourse = null,
                                     courseIDManageCourse = null,
                                     tempManageCourse = null;
-                            int count = 1, staffNumManageCourse = 0, globalUpdatecourseID = 0;
+                            int count = 1, staffNumManageCourse = 0;
                             Date startDate = new Date(0);
                             Date endDate = new Date(0);
 
@@ -255,7 +265,7 @@
                                 else 
                                 temp = "active";
                         %>
-                            <tr class="<%= temp %>">    
+                            <tr id="del-<%= courseIDManageCourse %>" class="<%= temp %>">    
                                 <td><%= count%></td>
                                 <td><%= courseCodeManageCourse %></td>
                                 <td><%= courseNameManageCourse %></td>
@@ -269,167 +279,29 @@
                                 <td><%= courseStatusManageCourse %></td>
                                 <td><%= staffNumManageCourse %></td>
                                 <td class="text-center">
-                                    <i class="updateCourse glyphicon glyphicon-refresh" target="2" data-toggle="tooltip" data-placement="left" title="update" onclick="myUpdateFunction(<%= courseIDManageCourse %>)"></i>
-                                    <i class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteCourse"></i>
+                                    <a href="updateCourse.jsp?getCourseIDtoUpdate=<%= courseIDManageCourse %>" ><i name="updateButtonID" value="true" class="updateCourse glyphicon glyphicon-refresh text-yellow" data-toggle="tooltip" data-placement="left" title="update"></i></a>
+                                    
+                                    <!--http://stackoverflow.com/questions/7435705/how-can-i-delete-database-records-from-a-jsp-page-->
+                                    <i name="deleteCourseID" value="true" class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteCourse"></i>
+                                    <a href="" onclick="delete_seq(<%= courseIDManageCourse%>); return false;">
+                                    <i class="fa fa-trash-o fa-2x text-red"></i><%= courseIDManageCourse %></a>
                                 </td> 
                                 <%  count++;
                                     }
                                 %>
                             </tr></tbody>
-                </table><%= globalUpdatecourseID %>
-        </div></div>
-                              
-        <!-- UPDATE COURSE -->    
-        <div class="targetDiv" id="div2">
-            <div class="container">
-              <div class="row clearfix">
-                  <div class="col-md-8 column">
-                      <h3 class="page-header">Update Course</h3>
-                      <form class="form-horizontal" role="myFormUpdate" data-toggle="validator">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Course Code</label>
-                            <div class="col-sm-5">
-                                <input name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group"> 
-                            <label class="col-sm-2 control-label">Course Name</label>
-                            <div class="col-sm-5">
-                                <input name="courseNameInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="col-sm-2 control-label">Course Tutor</label>
-                            <div class="col-sm-5">
-                                <input name="courseTutorInput" type="text" pattern="^[a-zA-Z ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Venue</label>
-                            <div class="col-sm-5">
-                                <input name="venueInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Objective</label>
-                            <div class="col-sm-5">
-                                <input name="objectiveInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Objective" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Organizer</label>
-                            <div class="col-sm-5">
-                                <input name="organizerInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Organizer" required/>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Course Category</label>
-                            <div class="col-sm-5">
-                                <select name="courseCategoryInput" class="form-control">
-                                    <option>Academic</option>
-                                    <option>Non-academic</option>
-                                    <option>Latihan ICT</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Start Date</label>
-                            <div class="col-sm-5">
-                                <div class="input-append date input-group" id="dp3" data-date=" " data-date-format="dd-mm-yyyy">
-                                    <input name="startDateInput" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                        <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                        </span>
-                        </div></div></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">End Date</label>
-                            <div class="col-sm-5">
-                                <div class="input-append date input-group" id="dp4" data-date=" " data-date-format="dd-mm-yyyy">
-                                    <input name="endDateInput" class="form-control input-sm" value="" type="text" data-required="true"/>
-                                        <span class="add-on input-group-addon" style="background:transparent;"><i class="glyphicon glyphicon-calendar text-danger"></i>
-                                        </span>
-                                </div> </div></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Course Status</label>
-                            <div class="col-sm-5">
-                                <select name="courseStatusInput" class="form-control">
-                                    <option>Done</option>
-                                    <option>Plan</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Staff Number</label>
-                            <div class="col-sm-5">
-                                <select name="staffNumberInput" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Duration(Hour)</label>
-                            <div class="col-sm-5">
-                                <select name="durationInput" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button name="updateButtonCourse" value="true" type="submit" class="btn btn-primary">Update Course</button>
-                            </div>
-                        </div>
-            </form>
-            <%
-            boolean updateButtonCourse = Boolean.parseBoolean(request.getParameter("updateButtonCourse"));
-                
-                if(updateButtonCourse){
-                    courseCodeInput     = request.getParameter("courseCodeInput");
-                    courseNameInput     = request.getParameter("courseNameInput");
-                    courseTutorInput    = request.getParameter("courseTutorInput");
-                    venueInput          = request.getParameter("venueInput");
-                    objectiveInput      = request.getParameter("objectiveInput");         
-                    organizerInput      = request.getParameter("organizerInput");        
-                    courseCategoryInput = request.getParameter("courseCategoryInput");        
-                    startDateInput      = request.getParameter("startDateInput");       
-                    endDateInput        = request.getParameter("endDateInput");       
-                    courseStatusInput   = request.getParameter("courseStatusInput");       
-                    staffNumberInput    = request.getParameter("staffNumberInput");       
-                    durationInput       = request.getParameter("durationInput");
-                    
-                    String[] parts = startDateInput.split("-", 3);
-                    startDateInput = parts[2] + "-" + parts[1] + "-" + parts[0];    //part2(year), part1(month), part0(day)
-                    
-                    parts = endDateInput.split("-", 3);
-                    endDateInput = parts[2] + "-" + parts[1] + "-" + parts[0];      //part2(year), part1(month), part0(day)
-                    
-                 template = "UPDATE courseinfo SET courseCode='"+ courseCodeInput +"', courseName='"+ courseNameInput +"', "
-                    + "startDate='"+ startDateInput +"', endDate='"+ endDateInput +"', venue='"+ venueInput +"', objectives='"+ objectiveInput +"',"
-                    + "category='"+ courseCategoryInput +"', duration='0"+ durationInput +":00:00', organizer='"+ organizerInput +"', "
-                    + "courseStatus='"+ courseStatusInput +"', staffNum='"+ staffNumberInput +"', courseTutor='"+ courseTutorInput +"' WHERE courseID='2'";//"+ 2+"'";
-
-                    try{stmt.executeUpdate(template);}
-                    catch(SQLException sqle) {System.err.println("Error connecting: " + sqle);}
-                }
-            %>      
-                  </div></div></div>
-        </div>         
+                </table>
+        </div></div>        
     </div></div></div></div></div></div></div>
 
   <!-- /.DELETE COURSE -->
+      <% 
+            //boolean deleteCourseID = Boolean.getBoolean(request.getParameter("deleteCourseID"));
+            //if(deleteCourseID){
+      %>
   <div id="deleteCourse" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
+    
       <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -441,12 +313,11 @@
         </div>   
     </div>
   </div>
-</div>
+</div> 
   
 </body>
 <script src="../js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $('#myFormUpdate').validator();
     $('#myFormCreate').validator();
 </script>       
 <script type="text/javascript">
@@ -471,9 +342,31 @@
         });
     });
 </script>
-<script type="text/javascript">
-    function myUpdateFunction(var x) {
-       <%-- globalUpdatecourseID --%>  //x;
-    }
+<script>
+	function delete_seq(seq_id)
+	{
+            var r = confirm("Delete this sequence?");
+            if(r==true)
+            {
+                deleteSeq(seq_id);
+                $('#del-'+seq_id).fadeOut(1000);
+                toastr.success("Course Deleted", "Success" );    
+            }	
+	}
+        function deleteSeq(seq_id)
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+              }
+            else
+            {// code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET","delete_seq.jsp?seq_id="+seq_id,true);
+            xmlhttp.send();
+        }
 </script>
+
 <jsp:include page="footer.jsp"/>
