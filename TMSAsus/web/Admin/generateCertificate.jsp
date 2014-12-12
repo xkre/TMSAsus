@@ -92,7 +92,9 @@
                                 <td><%= category %></td>
                                 <td><%= courseStatus %></td>
                                 <td><%= staffNum %></td>
-                                <td class="text-center"><i href="" class="glyphicon glyphicon-forward" data-toggle="tooltip" data-placement="left" title="generate certificate"></i></td>
+                                <td class="text-center">
+                                    <a href="certificareWord.jsp?a=<%= courseCode%>&b=<%=courseName%>&c=<%=courseTutor%>&d=<%=venue%>&e=<%=organizer%>&f=<%=category%>">
+                                        <i class="glyphicon glyphicon-download-alt" data-toggle="tooltip" data-placement="left" title="generate certificate"></i></a></td>
                                 <%  count++;
                                     }
                                 %>

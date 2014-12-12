@@ -174,7 +174,6 @@
                         </div>
             </form>
             <%
-            
                  updateButtonCourse = Boolean.parseBoolean(request.getParameter("updateButtonCourse"));
                 
                 if(updateButtonCourse){

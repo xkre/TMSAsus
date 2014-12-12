@@ -282,9 +282,8 @@
                                     <a href="updateCourse.jsp?getCourseIDtoUpdate=<%= courseIDManageCourse %>" ><i name="updateButtonID" value="true" class="updateCourse glyphicon glyphicon-refresh text-yellow" data-toggle="tooltip" data-placement="left" title="update"></i></a>
                                     
                                     <!--http://stackoverflow.com/questions/7435705/how-can-i-delete-database-records-from-a-jsp-page-->
-                                    <i name="deleteCourseID" value="true" class="glyphicon glyphicon-remove" data-toggle="modal" data-target="#deleteCourse"></i>
                                     <a href="" onclick="delete_seq(<%= courseIDManageCourse%>); return false;">
-                                    <i class="fa fa-trash-o fa-2x text-red"></i><%= courseIDManageCourse %></a>
+                                    <i class="glyphicon glyphicon-remove text-red"></i></a>
                                 </td> 
                                 <%  count++;
                                     }
@@ -295,10 +294,6 @@
     </div></div></div></div></div></div></div>
 
   <!-- /.DELETE COURSE -->
-      <% 
-            //boolean deleteCourseID = Boolean.getBoolean(request.getParameter("deleteCourseID"));
-            //if(deleteCourseID){
-      %>
   <div id="deleteCourse" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     
