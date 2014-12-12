@@ -4,9 +4,17 @@
         <servlet-name>testDBConnect</servlet-name>
         <servlet-class>testpackage.testDBConnect</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginVerify</servlet-name>
+        <servlet-class>System.loginVerify</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testDBConnect</servlet-name>
         <url-pattern>/testDBConnect</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginVerify</servlet-name>
+        <url-pattern>/loginVerify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
