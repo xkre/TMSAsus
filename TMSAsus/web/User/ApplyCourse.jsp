@@ -3,10 +3,10 @@
 
 <%
 
-//    int staffID = 0;
-//    if (session.getAttribute("staffID") != null || session.getAttribute("staffID").equals("")) {
-//        staffID = Integer.parseInt(session.getAttribute("staffID").toString());
-//    } %>
+    int staffID = 0;
+    if (session.getAttribute("staffID") != null || session.getAttribute("staffID").equals("")) {
+        staffID = Integer.parseInt(session.getAttribute("staffID").toString());
+    } %>
 
 
 <li>
@@ -36,7 +36,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Available Courses</h1>
                 <%
-                    int staffID = 3;
+
                     DBConnect.loadConnection();
                     Connection con = DBConnect.getConnection();
                     String query = "Select * from courseinfo WHERE courseStatus = 'Available'";
@@ -70,7 +70,7 @@
                                     <td><%= result.getString("courseName")%></td>
                                     <td><%= result.getString("startDate")%></td>
                                     <td><%= result.getString("endDate")%></td>
-                                    <td><a href="ApplyCourse.jsp"><i class="glyphicon glyphicon-pencil"></i> Apply</a></td>
+                                    <td><a href="<%= "../ApplyCourse?courseID="+result.getString("courseID") %>" ><i class="glyphicon glyphicon-pencil"></i> Apply</a></td>
                                 </tr>
 
                                 <%

@@ -1,5 +1,11 @@
 <%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
+
+<%
+    int staffID = 0;
+    if (session.getAttribute("staffID") != null || session.getAttribute("staffID").equals("")) {
+        staffID = Integer.parseInt(session.getAttribute("staffID").toString());
+    } %>
                         <li>
                             <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
                         </li>
@@ -28,10 +34,10 @@
                         <h1 class="page-header">View Status</h1>
                         
                         <%
-                    int staffID = 3;
+
                     DBConnect.loadConnection();
                     Connection con = DBConnect.getConnection();
-                    String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID=6";
+                    String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID="+staffID;
                     PreparedStatement statement = con.prepareStatement(query);
 
 //                    statement.setInt(1, 3);
@@ -47,7 +53,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            
                                             <th>Course Code</th>
                                             <th>Course Name</th>
                                             <th>Date Start</th>
@@ -58,7 +64,7 @@
                                     <tbody>
                                         <% while (result.next()) {%>
                                 <tr >
-                                    <td><%= result.getString("courseID")%></td>
+                                    
                                     <td><%= result.getString("courseCode")%></td>
                                     <td><%= result.getString("courseName")%></td>
                                     <td><%= result.getString("startDate")%></td>

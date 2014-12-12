@@ -9,8 +9,8 @@
         <servlet-class>System.loginVerify</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>applyCourse</servlet-name>
-        <servlet-class>System.applyCourse</servlet-class>
+        <servlet-name>ApplyCourse</servlet-name>
+        <servlet-class>System.ApplyCourse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testDBConnect</servlet-name>
@@ -21,8 +21,8 @@
         <url-pattern>/loginVerify</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>applyCourse</servlet-name>
-        <url-pattern>/applyCourse</url-pattern>
+        <servlet-name>ApplyCourse</servlet-name>
+        <url-pattern>/ApplyCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

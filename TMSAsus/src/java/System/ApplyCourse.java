@@ -11,17 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dbConnection.*;
-import java.sql.*;
-import java.util.Date;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import dbConnection.DBConnect;
+import java.sql.SQLException;
 
 /**
  *
  * @author Akram
  */
-public class loginVerify extends HttpServlet {
+public class ApplyCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,51 +34,57 @@ public class loginVerify extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
-
-        DBConnect.loadConnection();
-        Connection con = DBConnect.getConnection();
-
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
 
-            String user = null;
-            String pwd = null;
-            String privelage = null;
+            String a, b;
+            int courseID=0, staffID=0;
 
-            boolean loginSuccess = false;
-            HttpSession session = request.getSession(true);
-            if (request.getHeader("referer") == null) {
-                session.invalidate();
-                response.sendRedirect("./login.jsp?error=1");
-            } else if (request.getHeader("referer").contains("login.jsp")) {
-                user = request.getParameter("username");
-                pwd = request.getParameter("password");
-                String query = "SELECT * FROM logininfo WHERE username='"+user+"' AND password='"+pwd+"'";
-                //out.println(query);
-                ResultSet result = DBConnect.doQuery(query);
-                if (!result.next()) {
-                    loginSuccess = false;
-                    response.sendRedirect("./login.jsp?error=2");
-                } else {
-                    loginSuccess = true;
-                    privelage = result.getString("privelage");
-                    //INSERT user info into session
-                    session.setAttribute("staffID", result.getString("staffID"));
-                    session.setAttribute("privelage", privelage);
-                }
+            a = request.getParameter("courseID");
+            b = (String) session.getAttribute("staffID");
+            if (a!=null)
+            courseID = Integer.parseInt(a);
+            if (b!=null)
+            staffID = Integer.parseInt(b);
+            
+            out.println(courseID+"<br>");
+            out.println(staffID+"<br>");
+            out.println(b+"<br>");
+
+            applyCourse(courseID, staffID, response, out);
+        }
+    }
+
+    public void applyCourse(int courseID, int staffID, HttpServletResponse response, PrintWriter out) {
+        try {
+            DBConnect.loadConnection();
+            Connection con = DBConnect.getConnection();
+            String query = "INSERT into participationinfo "
+                    + "(staffID, courseID, participantRole, participantStatus, attendanceStatus)"
+                    + "values (?,?,'participant','Unverified',0) ";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, staffID);
+            statement.setInt(2, courseID);
+            
+            int result = statement.executeUpdate();
+            
+            if (result == 1){
+                response.sendRedirect("./User/ApplyCourse.jsp");
             }
-            if (loginSuccess) {
-                System.out.println("somewhere2");
-                if (privelage.equals("staff")) {
-                    response.sendRedirect("./User/ViewStatus.jsp");//mainPage
-                } else if (privelage.equals("admin")) {
-                    response.sendRedirect("./index.html");//mainPage
-                } else {
-                    response.sendRedirect("./index.html");//mainPage
-                }
-            }
-        } catch (SQLException sqle) {
+            else if (result == 0)
+                out.println("ERROR : <a href='./ApplyCourse.jsp' > Back</a>");
+        } 
+        catch (SQLException sqle) {
             System.err.println("Error connecting: " + sqle);
+            System.err.println("Punca:  " + sqle.toString());
+            System.err.println("SQLState:  " + sqle.getSQLState());
+            System.err.println("Message:  " + sqle.getMessage());
+            System.err.println("Vendor:  " + sqle.getErrorCode());
+        }
+        catch (IOException e){
+            System.err.println("Error: " + e);
         }
     }
 
