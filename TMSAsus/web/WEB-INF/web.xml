@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>ApplyCourse</servlet-name>
-        <servlet-class>System.ApplyCourse</servlet-class>
+        <servlet-class>System.ApplyCourse2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testDBConnect</servlet-name>

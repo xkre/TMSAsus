@@ -17,12 +17,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import dbConnection.DBConnect;
 import java.sql.SQLException;
+import System.Verifier;
 
 /**
  *
  * @author Akram
  */
-public class ApplyCourse extends HttpServlet {
+public class ApplyCourse2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +36,19 @@ public class ApplyCourse extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String a, b;
             int courseID = 0, staffID = 0;
             a = request.getParameter("courseID");
-            b = (String) session.getAttribute("staffID");
+            
             if (a != null) {
                 courseID = Integer.parseInt(a);
-            }
-            if (b != null) {
-                staffID = Integer.parseInt(b);
+                staffID = Verifier.getStaffID(request);
             }
             out.println(courseID + "<br>");
             out.println(staffID + "<br>");
-            out.println(b + "<br>");
             applyCourse(courseID, staffID, response, out);
         }
     }
