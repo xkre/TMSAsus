@@ -29,4 +29,21 @@ public class Verifier {
         else
             return false; 
     }
+    
+    public static void checkPrivelage(String privelage,HttpServletRequest request, HttpServletResponse response){
+        User userBean = (User)request.getSession().getAttribute("user");
+        
+        if (userBean.getPrivelage().equals(privelage)){
+            return;
+        }
+        try{
+            if (userBean.getPrivelage().equals("admin"))
+                response.sendRedirect("./Admin/manageCourse.jsp");
+            else if (userBean.getPrivelage().equals("staff"))
+                response.sendRedirect("./User/ViewStatus.jsp");
+        }
+        catch(Exception e){
+            System.err.println("Error: "+e);
+        }
+    }
 }

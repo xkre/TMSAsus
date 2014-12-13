@@ -56,6 +56,7 @@ public class ApplyCourse2 extends HttpServlet {
     public void applyCourse(int courseID, int staffID, HttpServletResponse response, PrintWriter out) {
         DBConnect db = new DBConnect();
         try {
+            db.loadConnection();
             Connection con = db.getConnection();
             String query = "INSERT into participationinfo "
                     + "(staffID, courseID, participantRole, participantStatus, attendanceStatus)"
@@ -81,6 +82,7 @@ public class ApplyCourse2 extends HttpServlet {
         finally{
             db.closeConnection();
         }
+
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
