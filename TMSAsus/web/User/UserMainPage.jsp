@@ -6,6 +6,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.ArrayList"%>
 
 <!--<//jsp:useBean id="user" class="beans.User" scope="session"><//jsp:useBean> -->
 
@@ -16,6 +17,10 @@
     else
         response.sendRedirect("../login.jsp");
 
+    
+    DBConnect db = new DBConnect();
+    db.loadConnection();
+    Connection con = db.getConnection();
 %>
 <!DOCTYPE html>
 <html lang="en">

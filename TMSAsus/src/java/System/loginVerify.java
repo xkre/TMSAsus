@@ -37,8 +37,8 @@ public class loginVerify extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        DBConnect.loadConnection();
-        Connection con = DBConnect.getConnection();
+        DBConnect db = new DBConnect();
+        db.loadConnection();
 
         try (PrintWriter out = response.getWriter()) {
 
@@ -56,7 +56,7 @@ public class loginVerify extends HttpServlet {
                 pwd = request.getParameter("password");
                 String query = "SELECT * FROM logininfo WHERE username='"+user+"' AND password='"+pwd+"'";
                 //out.println(query);
-                ResultSet result = DBConnect.doQuery(query);
+                ResultSet result = db.doQuery(query);
                 if (!result.next()) {
                     loginSuccess = false;
                     response.sendRedirect("./login.jsp?error=2");
@@ -79,6 +79,9 @@ public class loginVerify extends HttpServlet {
             }
         } catch (SQLException sqle) {
             System.err.println("Error connecting: " + sqle);
+        }
+        finally{
+            db.closeConnection();
         }
     }
     

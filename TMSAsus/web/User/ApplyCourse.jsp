@@ -33,17 +33,19 @@
                 <h1 class="page-header">Available Courses</h1>
                 <%
 
-                    DBConnect.loadConnection();
-                    Connection con = DBConnect.getConnection();
                     String query = "Select * from courseinfo WHERE courseStatus = 'Available'";
                     PreparedStatement statement = con.prepareStatement(query);
 
 //                    statement.setInt(1, 3);
 //                    statement.executeUpdate();
-                    ResultSet result;
+                    ResultSet result, result2;
 
-                    result = DBConnect.doQuery(statement);
-
+                    result = db.doQuery(statement);
+                    result2 = db.doQuery("SELECT courseID from participationinfo WHERE staffID="+staffID);
+                    ArrayList courseIDList = new ArrayList<Integer>();
+                    while(result2.next())
+                        courseIDList.add(result2.getInt("courseID"));
+                    
                 %>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -66,11 +68,13 @@
                                     <td><%= result.getString("courseName")%></td>
                                     <td><%= result.getString("startDate")%></td>
                                     <td><%= result.getString("endDate")%></td>
-                                    <td><a href="<%= "../ApplyCourse?courseID="+result.getString("courseID") %>" ><i class="glyphicon glyphicon-pencil"></i> Apply</a></td>
+                                    
+                                    <td><a href=<% if (!courseIDList.contains(result.getInt("courseID"))){%>
+                                    "<%= "../ApplyCourse?courseID="+result.getString("courseID") %>"><i class="glyphicon glyphicon-pencil"></i> Apply</a><% } %></td>
                                 </tr>
 
                                 <%
-                                    }
+                                    }db.closeConnection();
                                 %>
 
                             </tbody>

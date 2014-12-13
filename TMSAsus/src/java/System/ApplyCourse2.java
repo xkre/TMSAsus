@@ -54,9 +54,9 @@ public class ApplyCourse2 extends HttpServlet {
     }
 
     public void applyCourse(int courseID, int staffID, HttpServletResponse response, PrintWriter out) {
+        DBConnect db = new DBConnect();
         try {
-            DBConnect.loadConnection();
-            Connection con = DBConnect.getConnection();
+            Connection con = db.getConnection();
             String query = "INSERT into participationinfo "
                     + "(staffID, courseID, participantRole, participantStatus, attendanceStatus)"
                     + "values (?,?,'participant','Unverified',0) ";
@@ -77,6 +77,9 @@ public class ApplyCourse2 extends HttpServlet {
             System.err.println("Vendor: " + sqle.getErrorCode());
         } catch (IOException e) {
             System.err.println("Error: " + e);
+        }
+        finally{
+            db.closeConnection();
         }
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

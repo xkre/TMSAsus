@@ -33,8 +33,7 @@
                         
                         <%
 
-                    DBConnect.loadConnection();
-                    Connection con = DBConnect.getConnection();
+
                     String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID="+staffID;
                     PreparedStatement statement = con.prepareStatement(query);
 
@@ -42,7 +41,7 @@
 //                    statement.executeUpdate();
                     ResultSet result;
 
-                    result = DBConnect.doQuery(statement);
+                    result = db.doQuery(statement);
 
                 %>
                         
@@ -70,7 +69,7 @@
                                     <td><%= result.getString("participantStatus")%></td>
                                     
                                 <%
-                                    }
+                                    }db.closeConnection();
                                 %>
                                     
                                 </tr>
