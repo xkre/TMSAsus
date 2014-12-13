@@ -5,7 +5,6 @@
     String venue = request.getParameter("d");
     String organizer = request.getParameter("e");
     String category = request.getParameter("f");
-    out.println("asdasdasdasdasd");
 %>
 
     Congratulation, Here ur Certificate

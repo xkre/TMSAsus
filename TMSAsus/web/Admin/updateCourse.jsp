@@ -32,7 +32,8 @@
                     staffNumberInput = null,
                     durationInput = null,
                     template = null,
-                    temp = null;
+                    temp = null,
+                    temp1 = null;
             int count = 1;
             Date startDate = new Date(0);
             Date endDate = new Date(0);
@@ -56,7 +57,8 @@
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 startDateInput = df.format(startDate);
                 endDateInput = df.format(endDate);
-
+                
+                temp1 = courseCodeInput;
             }
         %>
     
@@ -66,11 +68,12 @@
             <div class="container">
               <div class="row clearfix">
                   <div class="col-md-8 column">
-                      <h3 class="page-header">Update Course <%= courseNameInput %> <%= getCourseIDtoUpdate %></h3>
+                      <h3 class="page-header">Update Course <%= courseNameInput %> <%= getCourseIDtoUpdate %> <%= temp1%></h3>
                       <form class="form-horizontal" role="myFormUpdate" data-toggle="validator">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Course Code</label>
                             <div class="col-sm-5">
+                                <input type="hidden" name="courseIDtoUpdate" value="<%= getCourseIDtoUpdate%>">
                                 <input value="<%= courseCodeInput %>" name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -174,9 +177,10 @@
                         </div>
             </form>
             <%
-                 updateButtonCourse = Boolean.parseBoolean(request.getParameter("updateButtonCourse"));
+                updateButtonCourse = Boolean.parseBoolean(request.getParameter("updateButtonCourse"));
                 
                 if(updateButtonCourse){
+                    getCourseIDtoUpdate = request.getParameter("courseIDtoUpdate");
                     courseCodeInput     = request.getParameter("courseCodeInput");
                     courseNameInput     = request.getParameter("courseNameInput");
                     courseTutorInput    = request.getParameter("courseTutorInput");
@@ -199,9 +203,8 @@
                  template = "UPDATE courseinfo SET courseCode='"+ courseCodeInput +"', courseName='"+ courseNameInput +"', "
                     + "startDate='"+ startDateInput +"', endDate='"+ endDateInput +"', venue='"+ venueInput +"', objectives='"+ objectiveInput +"',"
                     + "category='"+ courseCategoryInput +"', duration='0"+ durationInput +":00:00', organizer='"+ organizerInput +"', "
-                    + "courseStatus='"+ courseStatusInput +"', staffNum='"+ staffNumberInput +"', courseTutor='"+ courseTutorInput +"' WHERE courseID='" + getCourseIDtoUpdate + "'";
-                    
-                 System.out.println(template);
+                    + "courseStatus='"+ courseStatusInput +"', staffNum='"+ staffNumberInput +"', courseTutor='"+ courseTutorInput +"' WHERE courseID='" +getCourseIDtoUpdate + "'";
+
                     try{ 
                         stmt.executeUpdate(template);%>
                         <script type="text/javascript">

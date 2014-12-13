@@ -280,8 +280,6 @@
                                 <td><%= staffNumManageCourse %></td>
                                 <td class="text-center">
                                     <a href="updateCourse.jsp?getCourseIDtoUpdate=<%= courseIDManageCourse %>" ><i name="updateButtonID" value="true" class="updateCourse glyphicon glyphicon-refresh text-yellow" data-toggle="tooltip" data-placement="left" title="update"></i></a>
-                                    
-                                    <!--http://stackoverflow.com/questions/7435705/how-can-i-delete-database-records-from-a-jsp-page-->
                                     <a href="" onclick="delete_seq(<%= courseIDManageCourse%>); return false;">
                                     <i class="glyphicon glyphicon-remove text-red"></i></a>
                                 </td> 
