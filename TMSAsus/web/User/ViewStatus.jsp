@@ -2,10 +2,8 @@
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
-    int staffID = 0;
-    if (session.getAttribute("staffID") != null || session.getAttribute("staffID").equals("")) {
-        staffID = Integer.parseInt(session.getAttribute("staffID").toString());
-    } %>
+    
+ %>
                         <li>
                             <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
                         </li>

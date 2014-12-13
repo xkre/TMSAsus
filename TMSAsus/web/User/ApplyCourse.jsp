@@ -1,12 +1,8 @@
-<%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
 
-    int staffID = 0;
-    if (session.getAttribute("staffID") != null || session.getAttribute("staffID").equals("")) {
-        staffID = Integer.parseInt(session.getAttribute("staffID").toString());
-    } %>
+ %>
 
 
 <li>

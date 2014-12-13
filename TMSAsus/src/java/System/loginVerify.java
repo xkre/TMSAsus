@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dbConnection.*;
+import beans.User;
 import java.sql.*;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
@@ -62,13 +63,12 @@ public class loginVerify extends HttpServlet {
                 } else {
                     loginSuccess = true;
                     privelage = result.getString("privelage");
+                    setSession(result.getString("staffID"), privelage,request);
                     //INSERT user info into session
-                    session.setAttribute("staffID", result.getString("staffID"));
-                    session.setAttribute("privelage", privelage);
                 }
             }
             if (loginSuccess) {
-                System.out.println("somewhere2");
+//                out.println("somewhere2");
                 if (privelage.equals("staff")) {
                     response.sendRedirect("./User/ViewStatus.jsp");//mainPage
                 } else if (privelage.equals("admin")) {
@@ -80,6 +80,16 @@ public class loginVerify extends HttpServlet {
         } catch (SQLException sqle) {
             System.err.println("Error connecting: " + sqle);
         }
+    }
+    
+    private void setSession(String staffID, String privelage, HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        
+        User userBean = new User();
+        userBean.setStaffID(Integer.parseInt(staffID));
+        userBean.setPrivelage(privelage);
+        
+        session.setAttribute("user", userBean);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

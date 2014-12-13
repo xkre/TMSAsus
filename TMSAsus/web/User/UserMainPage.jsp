@@ -1,10 +1,22 @@
 <%@ page session="true" %>
 <%@page import="java.sql.Connection"%>
 <%@page import="dbConnection.DBConnect"%>
+<%@page import="System.Verifier"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
+
+<!--<//jsp:useBean id="user" class="beans.User" scope="session"><//jsp:useBean> -->
+
+<% 
+    int staffID = 0;
+    if(Verifier.isLoggedIn(request))
+        staffID = Verifier.getStaffID(request);
+    else
+        response.sendRedirect("../login.jsp");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <title>User </title>

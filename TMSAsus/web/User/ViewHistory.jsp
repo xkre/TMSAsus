@@ -1,4 +1,8 @@
 <%@ include file="../User/UserMainPage.jsp" %>
+
+<%
+        
+%>
                         <li>
                             <a href="ViewStatus.jsp"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
                         </li>
