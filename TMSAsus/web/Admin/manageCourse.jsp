@@ -39,42 +39,42 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Course Code</label>
                             <div class="col-sm-5">
-                                <input name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
+                                <input name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" maxlength="10" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group"> 
                             <label class="col-sm-2 control-label">Course Name</label>
                             <div class="col-sm-5">
-                                <input name="courseNameInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
+                                <input name="courseNameInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">Course Tutor</label>
                             <div class="col-sm-5">
-                                <input name="courseTutorInput" type="text" pattern="^[a-zA-Z ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
+                                <input name="courseTutorInput" type="text" pattern="^[a-zA-Z. ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Venue</label>
                             <div class="col-sm-5">
-                                <input name="venueInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
+                                <input name="venueInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Objective</label>
                             <div class="col-sm-5">
-                                <input name="objectiveInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Objective" required/>
+                                <input name="objectiveInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Objective" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Organizer</label>
                             <div class="col-sm-5">
-                                <input name="organizerInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Organizer" required/>
+                                <input name="organizerInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Organizer" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -179,6 +179,7 @@
                     parts = endDateInput.split("-", 3);
                     endDateInput = parts[2] + "-" + parts[1] + "-" + parts[0];      //part2(year), part1(month), part0(day)
                     
+                    durationInput = "0"+ durationInput +":00:00";
                 template = "INSERT INTO courseinfo (courseCode, courseName, "
                        + "startDate, endDate, venue, objectives, category, duration, "
                        + "organizer, courseStatus, staffNum, courseTutor) "

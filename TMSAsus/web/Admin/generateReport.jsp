@@ -48,6 +48,7 @@
                                     attentStudent = 0,
                                     courseIDCount = 0,
                                     courseIDCount_increment = 0;
+                                int[][] dataGraph = new int[12][2];
                                 int count = 1;
                                 Date startDate = new Date(0);
                                 Date endDate = new Date(0);
@@ -59,7 +60,7 @@
                                    int a = resultSet.getInt(1);
                                    courseIDCount +=a;
                                }
-                               multi = new int[courseIDCount][7];
+                               multi = new int[courseIDCount][9];
                                 
                                template = "SELECT * FROM courseinfo";
                                resultSet = DBConnect.doQuery(template);
@@ -90,6 +91,21 @@
                                    multi[courseIDCount_increment][4] = Integer.parseInt(dateFormatDay.format(endDate));       //startDate Day
                                    multi[courseIDCount_increment][5] = Integer.parseInt(dateFormatMonth.format(endDate));     //startDate month
                                    multi[courseIDCount_increment][6] = Integer.parseInt(dateFormatYear.format(endDate));      //startDate year
+                                   multi[courseIDCount_increment][7] = attentStudent;      //Attend
+                                   multi[courseIDCount_increment][8] = total;      //Total
+                                   
+                                   //System.out.println(Arrays.deepToString(multi));
+                                   int[] monthArray ={1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+                                   
+                                   for(int x=0; x<12; x++){
+                                        if(multi[courseIDCount_increment][2] == monthArray[x]){
+                                            dataGraph[x][0] += attentStudent;
+                                            dataGraph[x][1] += total-attentStudent;
+                                        }       
+                                    }
+                                   
+                                   System.out.println(Arrays.deepToString(dataGraph));
+                                   
                                    courseIDCount_increment++;
                                    
                                    if(courseStatus.equals("Done"))
@@ -108,15 +124,18 @@
                                         <i onclick="myFunction(<%= attentStudent %>, <%= total %>)" class="generateGraph glyphicon glyphicon-forward" data-toggle="tooltip" data-placement="left" title="generate report"></i></a
                                     </td>
                                 </tr>
-                                <%}%>
+                                <%
+                                attentStudent =0;
+                                total =0;
+                                count++;
+                            }%>
                         </tbody>
                 </table>
 		</div>
                 </div>
                 </div>
-                        <div class="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
-                        </div>
-                    </div>
+                        <div class="container" style="min-width: 310px; height: 100px; max-width: 600px; margin: 0 auto"></div>
+                        <div class="container1" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
                 </div>
             </div>
         </div>
@@ -135,6 +154,7 @@ function myFunction(attentStudent, total)
             ]
         };
     });
+    
     // Build the chart
     $('.container').highcharts({
         chart: {
@@ -143,7 +163,7 @@ function myFunction(attentStudent, total)
             plotShadow: false
         },
         title: {
-            text: 'Attendance Report For Course'
+            text: 'Attendance Report For Course "<%= courseName %>"'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -169,6 +189,63 @@ function myFunction(attentStudent, total)
                 ['Attend',  attentStudent ],
                 ['Absence', total-attentStudent]
             ]
+        }]
+    });
+    
+    $('.container1').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Monthly Average Attendace'
+        },
+        subtitle: {
+            text: 'Course Name'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ]
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Frequency'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} student</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Attend',
+            data: [<%= dataGraph[0][0] %>, <%= dataGraph[1][0] %>, <%= dataGraph[2][0] %>, <%= dataGraph[3][0] %>, <%= dataGraph[4][0] %>, <%= dataGraph[5][0] %>, 
+                    <%= dataGraph[6][0] %>, <%= dataGraph[7][0] %>, <%= dataGraph[8][0] %>, <%= dataGraph[9][0] %>, <%= dataGraph[10][0] %>, <%= dataGraph[11][0] %>, ]
+        }, {
+            name: 'Absence',
+            data: [<%= dataGraph[0][1] %>, <%= dataGraph[1][1] %>, <%= dataGraph[2][1] %>, <%= dataGraph[3][1] %>, <%= dataGraph[4][1] %>, <%= dataGraph[5][1] %>, 
+                    <%= dataGraph[6][1] %>, <%= dataGraph[7][1] %>, <%= dataGraph[8][1] %>, <%= dataGraph[9][1] %>, <%= dataGraph[10][1] %>, <%= dataGraph[11][1] %>, ]
         }]
     });
 }

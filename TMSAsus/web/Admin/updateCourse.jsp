@@ -5,10 +5,10 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.sql.Date"%>
 <%@ include file="../Admin/AdminMainPage.jsp" %>
-<li><a href="manageCourse.jsp" ><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
+            <li><a href="manageCourse.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
-            <li><a href="editProfile.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a></li>
+            <li><a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a></li>
             <li><a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
             </ul>
             </div>
@@ -68,48 +68,48 @@
             <div class="container">
               <div class="row clearfix">
                   <div class="col-md-8 column">
-                      <h3 class="page-header">Update Course <%= courseNameInput %> <%= getCourseIDtoUpdate %> <%= temp1%></h3>
+                      <h3 class="page-header">Update Course "<%= courseNameInput %>"</h3>
                       <form class="form-horizontal" role="myFormUpdate" data-toggle="validator">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Course Code</label>
                             <div class="col-sm-5">
                                 <input type="hidden" name="courseIDtoUpdate" value="<%= getCourseIDtoUpdate%>">
-                                <input value="<%= courseCodeInput %>" name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
+                                <input value="<%= courseCodeInput %>" name="courseCodeInput" type="text" pattern="^[a-zA-Z0-9]{6,}$" data-minlength="6" maxlength="10" class="form-control" id="courseCode" data-error="Invalid Course Code" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group"> 
                             <label class="col-sm-2 control-label">Course Name</label>
                             <div class="col-sm-5">
-                                <input value="<%= courseNameInput %>" name="courseNameInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
+                                <input value="<%= courseNameInput %>" name="courseNameInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Course Name" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label  class="col-sm-2 control-label">Course Tutor</label>
                             <div class="col-sm-5">
-                                <input value="<%= courseTutorInput %>" name="courseTutorInput" type="text" pattern="^[a-zA-Z ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
+                                <input value="<%= courseTutorInput %>" name="courseTutorInput" type="text" pattern="^[a-zA-Z. ]{6,}" data-minlength="6" maxlength="25" class="form-control" id="courseCode" data-error="Invalid Course Tutor" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Venue</label>
                             <div class="col-sm-5">
-                                <input value="<%= venueInput %>" name="venueInput" type="text" pattern="^[a-zA-Z0-9 ]{6,}" data-minlength="6" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
+                                <input value="<%= venueInput %>" name="venueInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Venue" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Objective</label>
                             <div class="col-sm-5">
-                                <input value="<%= objectiveInput %>" name="objectiveInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Objective" required/>
+                                <input value="<%= objectiveInput %>" name="objectiveInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Objective" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Organizer</label>
                             <div class="col-sm-5">
-                                <input value="<%= organizerInput %>" name="organizerInput" type="text" pattern="^[a-zA-Z0-9 ]{4,}" data-minlength="4" maxlength="20" class="form-control" id="courseCode" data-error="Invalid Organizer" required/>
+                                <input value="<%= organizerInput %>" name="organizerInput" type="text" pattern="^[a-zA-Z0-9.() ]{4,}" data-minlength="4" maxlength="30" class="form-control" id="courseCode" data-error="Invalid Organizer" required/>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -204,13 +204,14 @@
                     + "startDate='"+ startDateInput +"', endDate='"+ endDateInput +"', venue='"+ venueInput +"', objectives='"+ objectiveInput +"',"
                     + "category='"+ courseCategoryInput +"', duration='0"+ durationInput +":00:00', organizer='"+ organizerInput +"', "
                     + "courseStatus='"+ courseStatusInput +"', staffNum='"+ staffNumberInput +"', courseTutor='"+ courseTutorInput +"' WHERE courseID='" +getCourseIDtoUpdate + "'";
-
+                 
+                 
                     try{ 
-                        stmt.executeUpdate(template);%>
-                        <script type="text/javascript">
-                            toastr.success("Course updated","Success");    
-                        </script>
-                  <%}
+                        stmt.executeUpdate(template);
+                        String myTemp = "updateCourse.jsp?getCourseIDtoUpdate=" + getCourseIDtoUpdate;
+                        response.sendRedirect(myTemp);
+                        
+                    }
                     catch(SQLException sqle){
                         System.err.println("Error connecting: " + sqle);
                         %><script type="text/javascript">
@@ -231,4 +232,8 @@
 <script type="text/javascript">
     $('#myFormUpdate').validator();
 </script> 
+<script type="text/javascript">
+    
+    toastr.success("Course updated", "Success");
+</script>
 <jsp:include page="footer.jsp"/>
