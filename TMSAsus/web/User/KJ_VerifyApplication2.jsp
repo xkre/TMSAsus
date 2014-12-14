@@ -32,21 +32,58 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">View Status</h1>
                         
+                        <% 
+                        int staffIDUpdate = 0;
+                        if (request.getParameter("success")!=null){
+                            if (request.getParameter("success").equals("1"))
+                            {  %>
+                                <script type="text/javascript">
+                                    toastr.success("Approve Successful", "Success");
+                                </script>
+                            <% }
+                        else
+                            {  %>
+                                <script type="text/javascript">
+                                    toastr.error("Failed","Somethin When wrong, please inform technician");    
+                                </script>
+                            <% }}
+                        
+                        if (request.getHeader("referer").contains("KJ_VerifyApplication2")){
+                        if (request.getParameter("update")!= null)
+                            if (Boolean.parseBoolean(request.getParameter("update"))){
+                            try{
+                                staffIDUpdate = Integer.parseInt(request.getParameter("staffID"));
+                                String updateQuery = "UPDATE participationinfo "
+                                        + "SET participantStatus='Enrol' "
+                                        + "WHERE staffID="+staffIDUpdate;
+                                PreparedStatement updateStatement = con.prepareStatement(updateQuery);
+                                int result = updateStatement.executeUpdate();
+                                if (result == 1){  
+                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=1");
+                                }
+                                else { 
+                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=0");
+                                }
+                            }
+                            catch (SQLException e){
+                                System.err.println("ERROR "+e);
+                                response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=0");
+                            }
+                        }}
+                        %>
+                        
                         <%
-
-
                     String query = "SELECT * "
                             + "FROM participationinfo "
                             + "JOIN staffInfo USING (staffID) "
                             + "JOIN department USING (departmentID) "
                             + "JOIN faculty ON (faculty.facultyID = staffinfo.facultyID) "
-                            + "where courseID="+courseID;//+" AND departmentID="+departmentID;
+                            + "where courseID="+courseID+" AND participantStatus='Unverified'";//+" AND departmentID="+departmentID;
 //                    String query2 = "Select * from staffinfo where staffID=?";
                     PreparedStatement statement = con.prepareStatement(query);
 //                    PreparedStatement statement2 = con.prepareStatement(query2);
                     ResultSet result;
                     result = db.doQuery(statement);
-
                 %>
                         
                         <div class="panel-body">
@@ -78,8 +115,8 @@
                                     <td><%= result.getString("numIC")%></td>
                                     <td><%= result.getString("departmentName")%></td>
                                     <td><%= result.getString("facultyShortForm")%></td>
-                                    <td>Approve Application</td>
-                                    
+                                    <td><a href="./KJ_VerifyApplication2.jsp?staffID=<%= result.getString("staffID")%>&courseID=<%= result.getString("courseID")%>&update=true"
+                                            <i class="glyphicon glyphicon-pencil"></i> Approve</a></td>
                                 <%
                                     }db.closeConnection();
                                 %>
