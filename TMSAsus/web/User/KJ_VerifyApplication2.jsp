@@ -1,8 +1,9 @@
-<%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
-    
+    int courseID = Integer.parseInt(request.getParameter("courseID"));
+    int departmentID = 1;
+    //hard coded
  %>
                         <li>
                             <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
@@ -15,9 +16,6 @@
                         </li>
                         <li>
                             <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="KJ_VerifyApplication.jsp"><i class="glyphicon glyphicon-leaf"></i> Verify Application</a>
                         </li>
                         <li>
                             <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
@@ -37,13 +35,16 @@
                         <%
 
 
-                    String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID="+staffID;
+                    String query = "SELECT * "
+                            + "FROM participationinfo "
+                            + "JOIN staffInfo USING (staffID) "
+                            + "JOIN department USING (departmentID) "
+                            + "JOIN faculty ON (faculty.facultyID = staffinfo.facultyID) "
+                            + "where courseID="+courseID;//+" AND departmentID="+departmentID;
+//                    String query2 = "Select * from staffinfo where staffID=?";
                     PreparedStatement statement = con.prepareStatement(query);
-
-//                    statement.setInt(1, 3);
-//                    statement.executeUpdate();
+//                    PreparedStatement statement2 = con.prepareStatement(query2);
                     ResultSet result;
-
                     result = db.doQuery(statement);
 
                 %>
@@ -53,23 +54,31 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            
-                                            <th>Course Code</th>
-                                            <th>Course Name</th>
-                                            <th>Date Start</th>
-                                            <th>Date End</th>
-                                            <th>Status</th>
+                                            <th>No</th>
+                                            <th>Staff No</th>
+                                            <th>Staff Name</th>
+                                            <th>Staff IC No</th>
+                                            <th>Department</th>
+                                            <th>Faculty</th>
+                                            <th>Verify</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% while (result.next()) {%>
+<%                  int counter = 0; 
+                    while (result.next()) {
+                        counter++;
+//                        statement2.setInt(1, result.getInt(staffID));
+//                        result2 = statement2.executeQuery();
+                        
+%>
                                 <tr >
-                                    
-                                    <td><%= result.getString("courseCode")%></td>
-                                    <td><%= result.getString("courseName")%></td>
-                                    <td><%= result.getString("startDate")%></td>
-                                    <td><%= result.getString("endDate")%></td>
-                                    <td><%= result.getString("participantStatus")%></td>
+                                    <td><%= counter %></td>
+                                    <td><%= result.getString("staffNo")%></td>
+                                    <td><%= result.getString("name")%></td>
+                                    <td><%= result.getString("numIC")%></td>
+                                    <td><%= result.getString("departmentName")%></td>
+                                    <td><%= result.getString("facultyShortForm")%></td>
+                                    <td>Approve Application</td>
                                     
                                 <%
                                     }db.closeConnection();

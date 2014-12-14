@@ -8,6 +8,7 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
 
+
 <!--<//jsp:useBean id="user" class="beans.User" scope="session"><//jsp:useBean> -->
 
 <% 
@@ -33,14 +34,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
+    <link rel="icon" type="image/ico" href="../image/favicon.ico"/>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
     <link href="../css/sb-admin-2.css" rel="stylesheet">
     <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/datepicker.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/bootstrap-dialog.js" type="text/javascript"></script>
+    <link href="../css/bootstrap-dialog.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Toastr -->
+    <script src="../js/toastr.js" type="text/javascript"></script>
+    <link href="../css/toastr.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript">
+        toastr.options.progressBar = true; 
+        toastr.options.closeButton = true;  
+    </script>
+    
 
-    <link href="../css/datepicker.css" rel="stylesheet">
-    <script src="../js/bootstrap-datepicker.js"></script>
-    <script src="../js/jquery.js"></script>
 </head>
 <body>
 

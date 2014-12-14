@@ -17,7 +17,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import dbConnection.DBConnect;
 import java.sql.SQLException;
-import System.Verifier;
 
 /**
  *
@@ -40,7 +39,7 @@ public class ApplyCourse2 extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String a, b;
-            int courseID = 0, staffID = 0;
+            int courseID = 0, staffID = 0, result = 0;
             a = request.getParameter("courseID");
             
             if (a != null) {
@@ -49,11 +48,17 @@ public class ApplyCourse2 extends HttpServlet {
             }
             out.println(courseID + "<br>");
             out.println(staffID + "<br>");
-            applyCourse(courseID, staffID, response, out);
+            
+            result = applyCourse(courseID, staffID);
+            if (result == 1) {
+                response.sendRedirect("./User/ApplyCourse.jsp?status=1");
+            } else if (result == 0) {
+                out.println("ERROR : <a href='./User/ApplyCourse.jsp' > Back</a>");
+            }
         }
     }
 
-    public void applyCourse(int courseID, int staffID, HttpServletResponse response, PrintWriter out) {
+    public int applyCourse(int courseID, int staffID) {
         DBConnect db = new DBConnect();
         try {
             db.loadConnection();
@@ -65,24 +70,21 @@ public class ApplyCourse2 extends HttpServlet {
             statement.setInt(1, staffID);
             statement.setInt(2, courseID);
             int result = statement.executeUpdate();
-            if (result == 1) {
-                response.sendRedirect("./User/ApplyCourse.jsp?status=1");
-            } else if (result == 0) {
-                out.println("ERROR : <a href='./User/ApplyCourse.jsp' > Back</a>");
-            }
+            return result;
+            
         } catch (SQLException sqle) {
             System.err.println("Error connecting: " + sqle);
             System.err.println("Punca: " + sqle.toString());
             System.err.println("SQLState: " + sqle.getSQLState());
             System.err.println("Message: " + sqle.getMessage());
             System.err.println("Vendor: " + sqle.getErrorCode());
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Error: " + e);
         }
         finally{
             db.closeConnection();
         }
-
+        return 0;
     }
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 

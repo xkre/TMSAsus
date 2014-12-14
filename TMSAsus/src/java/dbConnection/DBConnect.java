@@ -30,13 +30,11 @@ public class DBConnect {
         DriverUtilities.loadDrivers();
         driver = DriverUtilities.getDriver(DriverUtilities.MYSQL);
         url = DriverUtilities.makeURL(serverName, databaseName, DriverUtilities.MYSQL);
-
         con = null;
         try {
             Class.forName(driver);
-
+            
             con = DriverManager.getConnection(url, username, password);
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

@@ -5,6 +5,8 @@
  %>
 
 
+
+
 <li>
     <a href="ViewStatus.jsp"  ><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
 </li>
@@ -47,6 +49,9 @@
                         courseIDList.add(result2.getInt("courseID"));
                     
                 %>
+                   
+
+                
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -57,7 +62,7 @@
                                     <th>Course Name</th>
                                     <th>Date Start</th>
                                     <th>Date End</th>
-                                    <th>Apply ME</th>
+                                    <th>Application</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,7 +75,8 @@
                                     <td><%= result.getString("endDate")%></td>
                                     
                                     <td><a href=<% if (!courseIDList.contains(result.getInt("courseID"))){%>
-                                    "<%= "../ApplyCourse?courseID="+result.getString("courseID") %>"><i class="glyphicon glyphicon-pencil"></i> Apply</a><% } %></td>
+                                    "javascript:myFunction(<%=result.getString("courseID")%>);">
+                                            <i class="glyphicon glyphicon-pencil"></i> Apply</a><% } %></td>
                                 </tr>
 
                                 <%
@@ -91,9 +97,25 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#form').validator()
-</script>      
-
-
+    function myFunction(a)
+    {
+        var b = a;
+        BootstrapDialog.show({
+            message: 'Are you sure to apply this course?',
+            buttons: [{
+                    label: 'Yes',
+                    cssClass: 'btn-primary',
+                    action: function(){
+                        window.location.href("../ApplyCourse?courseID="+b);
+                    }
+                },  {
+                    label: 'No',
+                    action: function(dialogRef){
+                        dialogRef.close();
+                    }
+            }]
+        });
+    };
+</script>
 </body>
 </html>

@@ -61,8 +61,9 @@
                                     if (error == 2) {%>
                                     <div class="form-group">
                                         <p>Wrong Username / Password</p>
-                                        <% } %>
+                                       
                                     </div>
+                                     <% } %>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <input class="form-control" placeholder="ACID" name="username" type="acid" autofocus>

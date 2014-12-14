@@ -1,4 +1,3 @@
-<%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
@@ -15,9 +14,6 @@
                         </li>
                         <li>
                             <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="KJ_VerifyApplication.jsp"><i class="glyphicon glyphicon-leaf"></i> Verify Application</a>
                         </li>
                         <li>
                             <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
@@ -37,7 +33,7 @@
                         <%
 
 
-                    String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID="+staffID;
+                    String query = "SELECT * FROM courseinfo";
                     PreparedStatement statement = con.prepareStatement(query);
 
 //                    statement.setInt(1, 3);
@@ -53,23 +49,29 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            
+                                            <th>No</th>
                                             <th>Course Code</th>
                                             <th>Course Name</th>
                                             <th>Date Start</th>
                                             <th>Date End</th>
-                                            <th>Status</th>
+                                            <th>Course Status</th>
+                                            <th>Verify</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% while (result.next()) {%>
+<%                  int counter = 0; 
+                    while (result.next()) {
+                        counter++;
+%>
                                 <tr >
-                                    
+                                    <td><%= counter %></td>
                                     <td><%= result.getString("courseCode")%></td>
                                     <td><%= result.getString("courseName")%></td>
                                     <td><%= result.getString("startDate")%></td>
                                     <td><%= result.getString("endDate")%></td>
-                                    <td><%= result.getString("participantStatus")%></td>
+                                    <td><%= result.getString("courseStatus")%></td>
+                                    <td><a href="./KJ_VerifyApplication2.jsp?courseID=<%= result.getString("courseID")%>"
+                                            <i class="glyphicon glyphicon-pencil"></i> View Applicants</a></td>
                                     
                                 <%
                                     }db.closeConnection();

@@ -1,7 +1,11 @@
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
-        
+        String query = "SELECT DISTINCT courseCode, courseName, category, startDate, endDate FROM courseinfo JOIN participationinfo USING(courseID) WHERE staffID=? AND endDate<?";
+        PreparedStatement statement = con.prepareStatement(query);
+        statement.setInt(1,staffID);
+        statement.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
+        ResultSet result = statement.executeQuery();
 %>
                         <li>
                             <a href="ViewStatus.jsp"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
@@ -29,7 +33,6 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">View History</h1>
-                        
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -45,24 +48,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+<%                                      int counter = 0;
+                                        while(result.next()){
+                                            counter++;
+%>
                                         <tr >
-                                            <td>1</td>
-                                            <td>SCSJ</td>
-                                            <td>Software Enggineering</td>
-                                            <td>Lecture only</td>
-                                            <td>14/12/14</td>
-                                            <td>15/12/14</td>
-                                            
+                                            <td><%=counter %></td>
+                                            <td><%=result.getString("courseCode") %></td>
+                                            <td><%=result.getString("courseName") %></td>
+                                            <td><%=result.getString("category") %></td>
+                                            <td><%=result.getString("startDate") %></td>
+                                            <td><%=result.getString("endDate") %></td>
                                         </tr>
-                                        <tr >
-                                            <td>2</td>
-                                            <td>SCSD</td>
-                                            <td>Database</td>
-                                            <td>Lecture and Pactical</td>
-                                            <td>19/12/14</td>
-                                            <td>20/12/14</td>
-                                            
-                                        </tr>
+<%
+                                                      }
+%>
                                     </tbody>
                                 </table>
                             </div>
