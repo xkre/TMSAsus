@@ -74,7 +74,7 @@ public class loginVerify extends HttpServlet {
                 } else if (privelage.equals("admin")) {
                     response.sendRedirect("./Admin/MainPage.jsp");//mainPage
                 } else {
-                    response.sendRedirect("./index.html");//mainPage
+                    response.sendRedirect("./User/MainPage.jsp");//mainPage
                 }
             }
         } catch (SQLException sqle) {

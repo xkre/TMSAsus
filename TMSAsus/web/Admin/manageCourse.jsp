@@ -87,7 +87,7 @@
 <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
 <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
 <li><a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a></li>
-<li><a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
+<li><a href="../logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a></li>
 </ul>
 </div>
 </div>

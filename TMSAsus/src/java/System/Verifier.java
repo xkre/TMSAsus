@@ -38,17 +38,21 @@ public class Verifier {
             return false; 
     }
     
-    public static void checkPrivelage(String privelage,HttpServletRequest request, HttpServletResponse response){
+    public static void checkPrivelage(HttpServletRequest request, HttpServletResponse response, String ... privelage){
         User userBean = (User)request.getSession().getAttribute("user");
         
-        if (userBean.getPrivelage().equals(privelage)){
+        for (int i=0; i < privelage.length ; i++)
+        if (userBean.getPrivelage().equals(privelage[i])){
             return;
         }
+        
         try{
             if (userBean.getPrivelage().equals("admin"))
-                response.sendRedirect("./Admin/manageCourse.jsp");
+                response.sendRedirect("./Admin/MainPage.jsp");
             else if (userBean.getPrivelage().equals("staff"))
-                response.sendRedirect("./User/ViewStatus.jsp");
+                response.sendRedirect("./User/MainPage.jsp");
+            else
+                response.sendRedirect("./User/MainPage.jsp");
         }
         catch(Exception e){
             System.err.println("Error: "+e);

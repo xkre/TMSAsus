@@ -15,10 +15,10 @@
                             <a href="ViewHistory.jsp"><i class="glyphicon glyphicon-cloud"></i> View History</a>
                         </li>
                         <li>
-                            <a href="editProfile.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a>
+                            <a href="editProfile.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Change Password</a>
                         </li>
                         <li>
-                            <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
+                            <a href="../logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                     </ul>
                 </div>
@@ -30,7 +30,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1 class="page-header">Edit Profile</h1>
+                        <h1 class="page-header">Change Password</h1>
                             
                             
 			<form class="form-horizontal" role="form" data-toggle="validator">

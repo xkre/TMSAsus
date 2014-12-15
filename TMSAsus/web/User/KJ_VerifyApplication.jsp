@@ -13,10 +13,10 @@
                             <a href="ViewHistory.jsp"><i class="glyphicon glyphicon-cloud"></i> View History</a>
                         </li>
                         <li>
-                            <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Edit Profile</a>
+                            <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Change Password</a>
                         </li>
                         <li>
-                            <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
+                            <a href="../logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                         </li>
                     </ul>
                 </div>
