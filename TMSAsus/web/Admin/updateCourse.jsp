@@ -23,8 +23,8 @@
         final String messg;
 
         // Sender's email ID and password needs to be mentioned
-        final String from = "TwinLight1993@gmail.com";
-        final String pass = "TwinLight93";
+        final String from = "handstosyria@gmail.com";
+        final String pass = "20UTMstudents";
 
         // Defining the gmail host
         String host = "smtp.gmail.com";
