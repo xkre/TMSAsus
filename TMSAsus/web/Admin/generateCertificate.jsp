@@ -39,7 +39,7 @@
                             </tr></thead>
                         <tbody>
                             <%                            
-                                ResultSet resultSet, resultSet1;
+                                ResultSet resultSet, resultSet1, resultSet2;
                                 String  template = null,
                                         courseCode = null,
                                         courseName = null,
@@ -50,8 +50,15 @@
                                         category = null,
                                         objective = null,
                                         courseStatus = null,
+                                        template1 = null,
+                                        template2 = null,
                                         courseID = null,
+                                        position = null,
+                                        KJ = null,
+                                        numIC = null,
                                         temp = null;
+                                String[][] getStaffName = new String[100][1];
+                                String[][] getStaffInfo = new String[100][4];
                                 int count = 1, staffNum = 0;
                                 Date startDate = new Date(0);
                                 Date endDate = new Date(0);
@@ -73,6 +80,24 @@
                                     startDate    = resultSet.getDate("startDate");
                                     endDate      = resultSet.getDate("endDate");
                                     
+                                    template1 = "SELECT courseID, name from participationinfo "
+                                            + "JOIN courseinfo USING (courseID) JOIN staffinfo USING (staffID)";
+                                    resultSet1 = DBConnect.doQuery(template1);
+                                        while (resultSet1.next()){
+                                            getStaffName[Integer.parseInt(resultSet1.getString("courseID"))][0] = resultSet1.getString("name");   
+                                        }
+                                        
+                                    template2 = "SELECT name,position,numIC FROM staffinfo where position='Head of Dept.'";
+                                    resultSet2 = DBConnect.doQuery(template2);
+                                    int template2int=0;
+                                        while (resultSet2.next()){
+                                            getStaffInfo[template2int][0] = courseID;
+                                            getStaffInfo[template2int][1] = resultSet2.getString("name");
+                                            getStaffInfo[template2int][2] = resultSet2.getString("position");
+                                            getStaffInfo[template2int][3] = resultSet2.getString("numIC");
+                                            template2int++;
+                                        }
+                                        
                                     if(courseStatus.equals("Done"))
                                     temp = "success";
                                 
@@ -93,7 +118,8 @@
                                 <td><%= courseStatus %></td>
                                 <td><%= staffNum %></td>
                                 <td class="text-center">
-                                    <a href="certificareWord.jsp?a=<%= courseCode%>&b=<%=courseName%>&c=<%=courseTutor%>&d=<%=venue%>&e=<%=organizer%>&f=<%=category%>">
+                                    <a href="certificareWord.jsp?a=<%= courseCode%>&b=<%=courseName%>&c=<%=courseTutor%>&d=<%=venue%>&e=<%=organizer%>
+                                       &f=<%=category%>&g=<%= getStaffInfo[count-1][1] %>&h=<%= getStaffInfo[count-1][2] %>&i=<%= getStaffInfo[count-1][3] %>">
                                         <i class="glyphicon glyphicon-download-alt" data-toggle="tooltip" data-placement="left" title="generate certificate"></i></a></td>
                                 <%  count++;
                                     }

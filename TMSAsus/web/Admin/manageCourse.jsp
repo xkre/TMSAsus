@@ -297,9 +297,9 @@
                                                         
                                                 try {
                                                     stmt.executeUpdate(template);%>
-                                        <script type="text/javascript">
-                                            toastr.success("New course created", "Success");
-                                        </script><%
+                                                    <script type="text/javascript">
+                                                        toastr.success("New course created", "Success");
+                                                    </script><%
                                             callingEmail(emailNeedToSend, courseCodeInput, courseNameInput, 
                                                     startDateInput, endDateInput, venueInput, objectiveInput, 
                                                     courseCategoryInput, durationInput, organizerInput, courseStatusInput,
