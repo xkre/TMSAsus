@@ -143,7 +143,7 @@
 </body>
 <script>
 function myFunction(attentStudent, total)
-  {
+  {      
     // Radialize the colors
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
         return {
