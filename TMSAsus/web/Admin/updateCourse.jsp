@@ -4,7 +4,84 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.sql.Date"%>
+<%@ page import ="java.sql.*" %>
+<%@ page import="java.util.*,javax.mail.*"%>
+<%@ page import="javax.mail.internet.*" %>
 <%@ include file="../Admin/AdminMainPage.jsp" %>
+<%!
+    public void callingEmails(String emailSend, String subjectCode, String subjectName, String startDateInput, 
+            String endDateInput, String venueInput, String objectiveInput, String courseCategoryInput, String durationInput, 
+            String organizerInput, String courseStatusInput, String staffNumberInput, String courseTutorInput ) {
+        
+        
+        //Creating a result for getting status that messsage is delivered or not!
+        String result;
+
+        // Get recipient's email-ID, message & subject-line from index.html page
+        final String to = emailSend;
+        final String subject;
+        final String messg;
+
+        // Sender's email ID and password needs to be mentioned
+        final String from = "TwinLight1993@gmail.com";
+        final String pass = "TwinLight93";
+
+        // Defining the gmail host
+        String host = "smtp.gmail.com";
+
+        // Creating Properties object
+        Properties props = new Properties();
+
+        // Defining properties
+        props.put("mail.smtp.host", host);
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.user", from);
+        props.put("mail.password", pass);
+        props.put("mail.port", "465");
+
+        // Authorized the Session object.
+        Session mailSession = Session.getInstance(props, new javax.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, pass);
+            }
+        });
+
+        try {
+
+            // Create a default MimeMessage object.
+            MimeMessage message = new MimeMessage(mailSession);
+
+            // Set From: header field of the header.
+            message.setFrom(new InternetAddress(from));
+
+            // Set To: header field of the header.
+            message.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(to));
+
+            // Set Subject: header field
+            message.setSubject("New Course created " + subjectName );
+            
+         // Now set the actual message
+            //message.setText("Thank You For Register " + "\nThis Is Your Registration Information" + "\nName : " + fname + " " + lname + "\nPassword : " + pwd + "\nEmail : " + to + "\nStatus : " + status);
+            String template= "Course Code="+ subjectCode +",\nCourse Name="+ subjectName +",\n"
+                    + "Start Date="+ startDateInput +",\nEnd Date="+ endDateInput +",\nVenue="+ venueInput +",\nObjectives="+ objectiveInput +",\n"
+                    + "Category="+ courseCategoryInput +",\nDuration=0"+ durationInput +":00:00,\nOrganizer="+ organizerInput +",\n"
+                    + "Course Status="+ courseStatusInput +",\nStaff Involve="+ staffNumberInput +",\nCourse Tutor="+ courseTutorInput;
+            message.setText(template);
+
+            // Send message
+            Transport.send(message);
+            result = "Your mail sent successfully....";
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            result = "Error: unable to send mail....";
+        }
+    }
+%>
+
             <li><a href="manageCourse.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> Manage Course</a></li>
             <li><a href="generateCertificate.jsp"><i class="glyphicon glyphicon-pencil"></i> Generate Certificate</a></li>
             <li><a href="generateReport.jsp"><i class="glyphicon glyphicon-cloud"></i> Generate Report</a></li>
@@ -33,6 +110,8 @@
                     durationInput = null,
                     template = null,
                     temp = null,
+                    KJsapa = null,
+                    emailNeedToSend = null,
                     temp1 = null;
             int count = 1;
             Date startDate = new Date(0);
@@ -157,6 +236,11 @@
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
                         </div>
@@ -165,8 +249,24 @@
                             <div class="col-sm-5">
                                 <select name="durationInput" class="form-control">
                                     <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Head Of Department</label>
+                            <div class="col-sm-5">
+                                <select name="KJsapa" class="form-control">
+                                    <option>Dr. Dayang Norhayati</option>
+                                    <option>Dr. Zulhilmi Ismail</option>
                                 </select>
                             </div>
                         </div>
@@ -193,6 +293,7 @@
                     courseStatusInput   = request.getParameter("courseStatusInput");       
                     staffNumberInput    = request.getParameter("staffNumberInput");       
                     durationInput       = request.getParameter("durationInput");
+                    KJsapa              = request.getParameter("KJsapa");
                     
                     String[] parts = startDateInput.split("-", 3);
                     startDateInput = parts[2] + "-" + parts[1] + "-" + parts[0];    //part2(year), part1(month), part0(day)
@@ -204,13 +305,21 @@
                     + "startDate='"+ startDateInput +"', endDate='"+ endDateInput +"', venue='"+ venueInput +"', objectives='"+ objectiveInput +"',"
                     + "category='"+ courseCategoryInput +"', duration='0"+ durationInput +":00:00', organizer='"+ organizerInput +"', "
                     + "courseStatus='"+ courseStatusInput +"', staffNum='"+ staffNumberInput +"', courseTutor='"+ courseTutorInput +"' WHERE courseID='" +getCourseIDtoUpdate + "'";
-                 
-                 
+                
+                 if(KJsapa.equals("Dr. Dayang Norhayati"))
+                    emailNeedToSend = "dayang@utm.my";
+
+                 else if(KJsapa.equals("Dr. Zulhilmi Ismail"))
+                    emailNeedToSend = "zulhilmi@utm.my";
+
                     try{ 
                         stmt.executeUpdate(template);
+                        callingEmails(emailNeedToSend, courseCodeInput, courseNameInput, 
+                                                    startDateInput, endDateInput, venueInput, objectiveInput, 
+                                                    courseCategoryInput, durationInput, organizerInput, courseStatusInput,
+                                                    staffNumberInput, courseTutorInput);
                         String myTemp = "updateCourse.jsp?getCourseIDtoUpdate=" + getCourseIDtoUpdate;
-                        response.sendRedirect(myTemp);
-                        
+                        response.sendRedirect(myTemp); 
                     }
                     catch(SQLException sqle){
                         System.err.println("Error connecting: " + sqle);
@@ -232,8 +341,4 @@
 <script type="text/javascript">
     $('#myFormUpdate').validator();
 </script> 
-<script type="text/javascript">
-    
-    toastr.success("Course updated", "Success");
-</script>
 <jsp:include page="footer.jsp"/>
