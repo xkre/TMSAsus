@@ -13,6 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Verifier {
     
+    public static String getPrivelage(HttpServletRequest request)
+    {
+        User userBean = (User)request.getSession().getAttribute("user");
+        String privelage = userBean.getPrivelage();
+        
+        return privelage;
+    
+    }
     public static int getStaffID(HttpServletRequest request)
     {
         User userBean = (User)request.getSession().getAttribute("user");

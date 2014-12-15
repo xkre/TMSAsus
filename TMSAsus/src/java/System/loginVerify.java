@@ -70,9 +70,9 @@ public class loginVerify extends HttpServlet {
             if (loginSuccess) {
 //                out.println("somewhere2");
                 if (privelage.equals("staff")) {
-                    response.sendRedirect("./User/ViewStatus.jsp");//mainPage
+                    response.sendRedirect("./User/MainPage.jsp");//mainPage
                 } else if (privelage.equals("admin")) {
-                    response.sendRedirect("./index.html");//mainPage
+                    response.sendRedirect("./Admin/MainPage.jsp");//mainPage
                 } else {
                     response.sendRedirect("./index.html");//mainPage
                 }
