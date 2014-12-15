@@ -1,18 +1,30 @@
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
-    int courseID = Integer.parseInt(request.getParameter("courseID"));
+    Verifier.checkPrivelage(request,response,"head of dept.");
+    int courseID;
+    if (request.getParameter("courseID") != null)
+        courseID = Integer.parseInt(request.getParameter("courseID"));
     int departmentID = 1, updateResult = -1;
-    //hard coded
+    
+    String query1 = "Select departmentID from Department where headofDepartmentID="+staffID;
+    ResultSet rslt1 = db.doQuery(query1);
+    rslt1.next();
+    departmentID = rslt1.getInt("departmentID");
+     
+    
  %>
                         <li>
-                            <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
+                            <a href="ViewStatus.jsp"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
                         </li>
                         <li>
                             <a href="ApplyCourse.jsp"><i class="glyphicon glyphicon-pencil"></i> Apply Course</a>
                         </li>
                         <li>
                             <a href="ViewHistory.jsp"><i class="glyphicon glyphicon-cloud"></i> View History</a>
+                        </li>
+                        <li>
+                            <a href="KJ_VerifyApplication.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Verify Application</a>
                         </li>
                         <li>
                             <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Change Password</a>
@@ -72,7 +84,7 @@
                             + "JOIN staffInfo USING (staffID) "
                             + "JOIN department USING (departmentID) "
                             + "JOIN faculty ON (faculty.facultyID = staffinfo.facultyID) "
-                            + "where courseID="+courseID+" AND participantStatus='Unverified'";//+" AND departmentID="+departmentID;
+                            + "where courseID="+courseID+" AND participantStatus='Unverified' AND departmentID="+departmentID;
 //                    String query2 = "Select * from staffinfo where staffID=?";
                     PreparedStatement statement = con.prepareStatement(query);
 //                    PreparedStatement statement2 = con.prepareStatement(query2);

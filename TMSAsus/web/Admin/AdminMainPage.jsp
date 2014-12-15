@@ -37,7 +37,7 @@
         else
             response.sendRedirect("../login.jsp");
         
-        Verifier.checkPrivelage(response);
+        Verifier.checkPrivelage(request,response,"admin");
         
         DBConnect myDBConnection = new DBConnect();
         myDBConnection.loadConnection();
@@ -58,7 +58,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">LOGO imgur</a>
+                <a class="navbar-brand" href="MainPage.jsp"><img src="../image/logo.jpg" width="150%" height="150%"></a>
             </div>
             <!-- /.navbar-header -->
 

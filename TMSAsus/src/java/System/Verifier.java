@@ -32,10 +32,12 @@ public class Verifier {
     public static boolean isLoggedIn(HttpServletRequest request){
         User userBean = (User)request.getSession().getAttribute("user");
         
-        if (userBean != null)
-            return true;
+        if (request.getSession() == null)
+            return false;
+        if (userBean == null)
+            return false;
         else
-            return false; 
+            return true; 
     }
     
     public static void checkPrivelage(HttpServletRequest request, HttpServletResponse response, String ... privelage){
@@ -48,11 +50,11 @@ public class Verifier {
         
         try{
             if (userBean.getPrivelage().equals("admin"))
-                response.sendRedirect("./Admin/MainPage.jsp");
+                response.sendRedirect("../Admin/MainPage.jsp");
             else if (userBean.getPrivelage().equals("staff"))
-                response.sendRedirect("./User/MainPage.jsp");
+                response.sendRedirect("../User/MainPage.jsp");
             else
-                response.sendRedirect("./User/MainPage.jsp");
+                response.sendRedirect("../User/MainPage.jsp");
         }
         catch(Exception e){
             System.err.println("Error: "+e);

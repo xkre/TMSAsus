@@ -14,6 +14,10 @@
                         <li>
                             <a href="ViewHistory.jsp"><i class="glyphicon glyphicon-cloud"></i> View History</a>
                         </li>
+                        <% if(Verifier.getPrivelage(request).equals("head of dept.")){ %>
+                        <li>
+                            <a href="KJ_VerifyApplication.jsp"><i class="glyphicon glyphicon-leaf"></i> Verify Application</a>
+                        </li><% } %>
                         <li>
                             <a href="editProfile.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Change Password</a>
                         </li>

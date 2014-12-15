@@ -1,16 +1,19 @@
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
-    
+    Verifier.checkPrivelage(request,response,"head of dept.");
  %>
                         <li>
-                            <a href="ViewStatus.jsp"  class="list-group-item-info"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
+                            <a href="ViewStatus.jsp"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
                         </li>
                         <li>
                             <a href="ApplyCourse.jsp"><i class="glyphicon glyphicon-pencil"></i> Apply Course</a>
                         </li>
                         <li>
                             <a href="ViewHistory.jsp"><i class="glyphicon glyphicon-cloud"></i> View History</a>
+                        </li>
+                        <li>
+                            <a href="KJ_VerifyApplication.jsp" class="list-group-item-info"><i class="glyphicon glyphicon-leaf"></i> Verify Application</a>
                         </li>
                         <li>
                             <a href="editProfile.jsp"><i class="glyphicon glyphicon-leaf"></i> Change Password</a>
@@ -31,8 +34,6 @@
                         <h1 class="page-header">View Status</h1>
                         
                         <%
-
-
                     String query = "SELECT * FROM courseinfo";
                     PreparedStatement statement = con.prepareStatement(query);
 
@@ -41,7 +42,6 @@
                     ResultSet result;
 
                     result = db.doQuery(statement);
-
                 %>
                         
                         <div class="panel-body">

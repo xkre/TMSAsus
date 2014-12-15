@@ -17,7 +17,7 @@
         staffID = Verifier.getStaffID(request);
     else
         response.sendRedirect("../login.jsp");
-
+    Verifier.checkPrivelage(request,response,"staff", "head of dept.");
     
     DBConnect db = new DBConnect();
     db.loadConnection();
