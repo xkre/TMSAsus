@@ -9,12 +9,13 @@ import beans.User;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 
 public class Verifier {
     
     public static String getPrivelage(HttpServletRequest request)
-    {
+    {              
         User userBean = (User)request.getSession().getAttribute("user");
         String privelage = userBean.getPrivelage();
         

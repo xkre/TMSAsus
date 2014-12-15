@@ -41,8 +41,6 @@
                     String query = "SELECT * FROM courseinfo INNER JOIN participationinfo USING (courseID) Where staffID="+staffID;
                     PreparedStatement statement = con.prepareStatement(query);
 
-//                    statement.setInt(1, 3);
-//                    statement.executeUpdate();
                     ResultSet result;
 
                     result = db.doQuery(statement);

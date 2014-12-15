@@ -2,7 +2,23 @@
 <%@ include file="../User/UserMainPage.jsp" %>
 
 <%
+    String justLoggedin = null;
     
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    Date date = new Date();
+    
+    if(request.getParameter("success")!=null){
+    justLoggedin =request.getParameter("success");
+        if (justLoggedin.equals("1")){
+            Cookie ck = new Cookie("lastLogin", dateFormat.format(date));
+            ck.setMaxAge(60*60*24*30);
+            response.addCookie(ck);  %>
+            <script type="text/javascript">
+                toastr.success("Login Succesful", "Success");
+            </script>
+            <%
+        }
+    }
  %>
  
                         <li>
@@ -55,7 +71,8 @@
                     <div class="col-lg-12">
                         <h1 class="page-header" align="center"><%=pagingName%> HOME PAGE</h1>
                         <div class="panel-body">
-                            <h2 align="center">WELCOME! <br/> <%= result.getString("name") %></h2>
+                            <h2 align="center">WELCOME! <br/> <%= result.getString("name") %></h2><br/>
+                            <p align="center">Last Login: <%= lastLogin %> </p>
                             <p align="center"><img src="../image/mainImage.jpg" width="80%" height="80%"></p>
                         </div>
 			<% db.closeConnection();    %>
@@ -66,9 +83,7 @@
 <script type="text/javascript">
     $('#form').validator()
 </script>      
-<script type="text/javascript">
-    toastr.success("Login Succesful", "Success");
-</script>
+
 
 </body>
 </html>

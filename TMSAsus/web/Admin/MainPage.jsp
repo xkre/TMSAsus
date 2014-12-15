@@ -16,6 +16,25 @@
     </nav>
 
     <%
+    String justLoggedin = null;
+    
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    java.util.Date date = new java.util.Date();
+    
+    if(request.getParameter("success")!=null){
+    justLoggedin =request.getParameter("success");
+        if (justLoggedin.equals("1")){
+            Cookie ck = new Cookie("lastLogin", dateFormat.format(date));
+            ck.setMaxAge(60*60*24*30);
+            response.addCookie(ck);  %>
+            <script type="text/javascript">
+                toastr.success("Login Succesful", "Success");
+            </script>
+            <%
+        }
+    }
+    
+    
     ResultSet result = myDBConnection.doQuery("Select name FROM staffinfo where staffID="+staffID);
     result.next();
     String pagingName;
@@ -40,6 +59,7 @@
             
              <div class="panel-body">
                             <h2 align="center">WELCOME! <br/> <%= result.getString("name") %></h2>
+                            <p align="center">Last Login: <%= lastLogin %> </p>
                             <p align="center"><img src="../image/mainImage.jpg" width="100%" height="100%"></p>
                         </div>
                   </div>
@@ -51,7 +71,5 @@
 <%
                 myDBConnection.closeConnection();
             %>      
-<script type="text/javascript">
-    toastr.success("Login Succesful", "Success");
-</script>
+
 <jsp:include page="footer.jsp"/>

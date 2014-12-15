@@ -63,7 +63,7 @@
                                         <p>Wrong Username / Password</p>
                                        
                                     </div>
-                                     <% } %>
+                                     <% }myDBConnection.closeConnection(); %>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <input class="form-control" placeholder="ACID" name="username" type="acid" autofocus>

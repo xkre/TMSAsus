@@ -7,11 +7,22 @@
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 
 <!--<//jsp:useBean id="user" class="beans.User" scope="session"><//jsp:useBean> -->
 
 <% 
+    Cookie [] cookies = request.getCookies();
+    String lastLogin = null;
+    if (cookies!= null)
+        for (Cookie ck : cookies){
+            if(ck.getName().equals("lastLogin"));
+                lastLogin = ck.getValue();
+                break;
+        }
+    
     int staffID = 0;
     if(Verifier.isLoggedIn(request))
         staffID = Verifier.getStaffID(request);

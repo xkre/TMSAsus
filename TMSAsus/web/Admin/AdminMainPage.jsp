@@ -4,6 +4,8 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="System.Verifier"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html lang="en">
 <title>Admin </title>
@@ -38,6 +40,15 @@
             response.sendRedirect("../login.jsp");
         
         Verifier.checkPrivelage(request,response,"admin");
+        
+        Cookie [] cookies = request.getCookies();
+        String lastLogin = null;
+        if (cookies!= null)
+        for (Cookie ck : cookies){
+            if(ck.getName().equals("lastLogin"));
+                lastLogin = ck.getValue();
+                break;
+        }
         
         DBConnect myDBConnection = new DBConnect();
         myDBConnection.loadConnection();

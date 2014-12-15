@@ -2,7 +2,7 @@
 
 <%
     Verifier.checkPrivelage(request,response,"head of dept.");
-    int courseID;
+    int courseID = 0;
     if (request.getParameter("courseID") != null)
         courseID = Integer.parseInt(request.getParameter("courseID"));
     int departmentID = 1, updateResult = -1;
@@ -11,8 +11,11 @@
     ResultSet rslt1 = db.doQuery(query1);
     rslt1.next();
     departmentID = rslt1.getInt("departmentID");
-     
     
+    String query2 = "SELECT courseCode FROM courseinfo where courseID="+courseID;     
+    ResultSet rslt2 = db.doQuery(query2);
+    rslt2.next();
+    String courseCode = rslt2.getString("courseCode");
  %>
                         <li>
                             <a href="ViewStatus.jsp"><i class="glyphicon glyphicon-hand-right"></i> View Status</a>
@@ -42,7 +45,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">View Status</h1>
+                        <h1 class="page-header">Verify Application <%=courseCode%></h1>
                         
                         <% 
                         int staffIDUpdate = 0;

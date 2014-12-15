@@ -39,7 +39,7 @@
                 <h1 class="page-header">Available Courses</h1>
                 <%
 
-                    String query = "Select * from courseinfo WHERE courseStatus = 'Available'";
+                    String query = "Select * from courseinfo WHERE courseStatus = 'Available' OR courseStatus = 'Plan'";
                     PreparedStatement statement = con.prepareStatement(query);
 
 //                    statement.setInt(1, 3);
@@ -49,9 +49,9 @@
                     result = db.doQuery(statement);
                     result2 = db.doQuery("SELECT courseID from participationinfo WHERE staffID="+staffID);
                     ArrayList courseIDList = new ArrayList<Integer>();
-                    while(result2.next())
+                    while(result2.next()){
                         courseIDList.add(result2.getInt("courseID"));
-                    
+                    }
                 %>
                    
 

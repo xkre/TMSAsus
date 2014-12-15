@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">View Status</h1>
+                        <h1 class="page-header">Verify Application</h1>
                         
                         <%
                     String query = "SELECT * FROM courseinfo";

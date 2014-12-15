@@ -70,11 +70,11 @@ public class loginVerify extends HttpServlet {
             if (loginSuccess) {
 //                out.println("somewhere2");
                 if (privelage.equals("staff")) {
-                    response.sendRedirect("./User/MainPage.jsp");//mainPage
+                    response.sendRedirect("./User/MainPage.jsp?success=1");//mainPage
                 } else if (privelage.equals("admin")) {
-                    response.sendRedirect("./Admin/MainPage.jsp");//mainPage
+                    response.sendRedirect("./Admin/MainPage.jsp?success=1");//mainPage
                 } else {
-                    response.sendRedirect("./User/MainPage.jsp");//mainPage
+                    response.sendRedirect("./User/MainPage.jsp?success=1");//mainPage
                 }
             }
         } catch (SQLException sqle) {
