@@ -3,6 +3,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="System.Verifier"%>
 <!DOCTYPE html>
 <html lang="en">
 <title>Admin </title>
@@ -30,6 +31,12 @@
         toastr.options.closeButton = true;  
     </script>
     <%  
+        int staffID = 0;
+        if(Verifier.isLoggedIn(request))
+            staffID = Verifier.getStaffID(request);
+        else
+            response.sendRedirect("../login.jsp");
+        
         DBConnect myDBConnection = new DBConnect();
         myDBConnection.loadConnection();
         Connection myConnection = myDBConnection.getConnection();
