@@ -39,7 +39,7 @@
                             </tr></thead>
                         <tbody>
                             <%                            
-                                ResultSet resultSet;
+                                ResultSet resultSet, resultSet1;
                                 String  template = null,
                                         courseCode = null,
                                         courseName = null,
@@ -106,6 +106,6 @@
                     </div>
                 </div>
             </div></div></div>
-
 </body>
+
 <jsp:include page="footer.jsp"/>
