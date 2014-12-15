@@ -161,7 +161,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Duration(Hour)</label>
+                            <label class="col-sm-2 control-label">Duration (hours)</label>
                             <div class="col-sm-5">
                                 <select name="durationInput" class="form-control">
                                     <option>1</option>

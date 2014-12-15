@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Staff Number</label>
+                            <label class="col-sm-2 control-label">No of Staff In-Charge</label>
                             <div class="col-sm-5">
                                 <select name="staffNumberInput" class="form-control">
                                     <option>1</option>
@@ -122,6 +122,11 @@
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
                         </div>
@@ -132,6 +137,13 @@
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
                                 </select>
                             </div>
                         </div>
@@ -217,11 +229,11 @@
                             <th>Venue</th>
                             <th>Start</th>
                             <th>End</th>
-                            <th>Duration</th>
+                            <th>Duration (hours) </th>
                             <th>Organizer</th>
                             <th>Category</th>
                             <th>Course Status</th>
-                            <th>No Staff</th>
+                            <th>No of Staff In-Charge</th>
                             <th>Action</th>
                         </tr></thead>
                     <tbody>

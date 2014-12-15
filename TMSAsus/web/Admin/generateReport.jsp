@@ -32,7 +32,7 @@
                                 <th>No</th>
                                 <th>Course Code</th>
                                 <th>Course Name</th>
-                                <th>Attandence</th>
+                                <th>Attendance</th>
                                 <th>Action</th>
                             </tr></thead>
                         <tbody>
@@ -197,7 +197,7 @@ function myFunction(attentStudent, total)
             type: 'column'
         },
         title: {
-            text: 'Monthly Average Attendace'
+            text: 'Monthly Average Attendance'
         },
         subtitle: {
             text: 'Course Name'

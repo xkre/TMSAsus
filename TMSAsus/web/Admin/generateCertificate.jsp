@@ -30,11 +30,11 @@
                                 <th>Venue</th>
                                 <th>Start</th>
                                 <th>End</th>
-                                <th>Duration</th>
+                                <th>Duration (hours)</th>
                                 <th>Organizer</th>
                                 <th>Category</th>
                                 <th>Course Status</th>
-                                <th>No Staff</th>
+                                <th>No of Staff in-Charge</th>
                                 <th>Generate</th>
                             </tr></thead>
                         <tbody>

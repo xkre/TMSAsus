@@ -1,4 +1,6 @@
 <%
+    String name = request.getParameter("");
+    String icNum = request.getParameter("");
     String courseCode = request.getParameter("a");
     String courseName = request.getParameter("b");
     String courseTutor = request.getParameter("c");
@@ -7,7 +9,9 @@
     String category = request.getParameter("f");
 %>
 
-    Congratulation, Here ur Certificate
+    Congratulation, you have completed this course.
+    Name          :<%= name%>
+    I/C No        :<%= icNum%>
     Course Code   :<%= courseCode%>
     Course Name   :<%= courseName%>
     Course Tutor  :<%= courseTutor%>
