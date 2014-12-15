@@ -2,7 +2,7 @@
 
 <%
     int courseID = Integer.parseInt(request.getParameter("courseID"));
-    int departmentID = 1;
+    int departmentID = 1, updateResult = -1;
     //hard coded
  %>
                         <li>
@@ -47,7 +47,7 @@
                                     toastr.error("Failed","Somethin When wrong, please inform technician");    
                                 </script>
                             <% }}
-                        
+                        if (request.getHeader("referer")!=null)
                         if (request.getHeader("referer").contains("KJ_VerifyApplication2")){
                         if (request.getParameter("update")!= null)
                             if (Boolean.parseBoolean(request.getParameter("update"))){
@@ -55,15 +55,9 @@
                                 staffIDUpdate = Integer.parseInt(request.getParameter("staffID"));
                                 String updateQuery = "UPDATE participationinfo "
                                         + "SET participantStatus='Enrol' "
-                                        + "WHERE staffID="+staffIDUpdate;
+                                        + "WHERE staffID="+staffIDUpdate+" AND courseID="+courseID;
                                 PreparedStatement updateStatement = con.prepareStatement(updateQuery);
-                                int result = updateStatement.executeUpdate();
-                                if (result == 1){  
-                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=1");
-                                }
-                                else { 
-                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=0");
-                                }
+                                updateResult = updateStatement.executeUpdate();
                             }
                             catch (SQLException e){
                                 System.err.println("ERROR "+e);
@@ -103,10 +97,7 @@
                                     <tbody>
 <%                  int counter = 0; 
                     while (result.next()) {
-                        counter++;
-//                        statement2.setInt(1, result.getInt(staffID));
-//                        result2 = statement2.executeQuery();
-                        
+                        counter++;                        
 %>
                                 <tr >
                                     <td><%= counter %></td>
@@ -119,6 +110,13 @@
                                             <i class="glyphicon glyphicon-pencil"></i> Approve</a></td>
                                 <%
                                     }db.closeConnection();
+                                    
+                                if (updateResult == 1){  
+                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=1");
+                                }
+                                else if (updateResult ==0){ 
+                                    response.sendRedirect("./KJ_VerifyApplication2.jsp?courseID="+courseID+"&success=0");
+                                }
                                 %>
                                     
                                 </tr>
@@ -136,7 +134,7 @@
 </div>
 </div>
 <script type="text/javascript">
-    $('#form').validator()
+    $('#form').validator();
 </script>      
         
 

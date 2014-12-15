@@ -149,7 +149,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Staff Number</label>
+                            <label class="col-sm-2 control-label">Number of Staff In-Charge</label>
                             <div class="col-sm-5">
                                 <select name="staffNumberInput" class="form-control">
                                     <option>1</option>
