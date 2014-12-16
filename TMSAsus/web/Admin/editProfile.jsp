@@ -58,13 +58,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Old Password</label>
                         <div class="col-sm-10">
-                           <input name="oldPassword" type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+                           <input name="oldPassword" type="password" data-minlength="5" class="form-control" id="inputPassword" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">New Password</label>
                         <div class="col-sm-10">
-                           <input name="newPassword" type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+                           <input name="newPassword" type="password" data-minlength="5" class="form-control" id="inputPassword" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">

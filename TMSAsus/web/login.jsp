@@ -66,7 +66,7 @@
                                      <% }myDBConnection.closeConnection(); %>
                                     <div class="form-group">
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="ACID" name="username" type="acid" autofocus>
+                                            <input class="form-control" placeholder="Username" name="username" type="acid" autofocus>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Password" name="password" type="password" value="">

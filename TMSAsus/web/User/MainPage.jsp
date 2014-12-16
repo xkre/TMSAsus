@@ -1,6 +1,6 @@
 <%@page import="javax.mail.Session"%>
 <%@ include file="../User/UserMainPage.jsp" %>
-
+<jsp:useBean id="user" class="beans.User" scope="session"></jsp:useBean>
 <%
     String justLoggedin = null;
     
@@ -53,6 +53,7 @@
 
         result = db.doQuery(statement);
         if(result!=null) result.next();
+        
         String pagingName;
         
         if(Verifier.getPrivelage(request).equals("staff"))
@@ -72,12 +73,13 @@
                         <h1 class="page-header" align="center"><%=pagingName%> HOME PAGE</h1>
                         <div class="panel-body">
                             <h2 align="center">WELCOME! <br/> <%= result.getString("name") %></h2><br/>
-                            <p align="center">Last Login: <%= lastLogin %> </p>
+                            <p align="center">Last Login: <%= lastLogin %> Staff ID:<jsp:getProperty name="user" property="staffID"></jsp:getProperty></p>
                             <p align="center"><img src="../image/mainImage.jpg" width="80%" height="80%"></p>
                         </div>
 			<% db.closeConnection();    %>
 		</div>
 	</div>
+            
 </div>
 </div>
 <script type="text/javascript">

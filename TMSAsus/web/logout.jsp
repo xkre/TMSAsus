@@ -48,7 +48,7 @@
                             <h3 class="panel-title">Successfully Logged Out</h3>
                         </div>
                         <div class="panel-body">
-                            <p><a href="login.jsp">Sign In</a></p>
+                            <p align="center"><a href="login.jsp">Sign In</a></p>
                         </div>
                     </div>
                 </div>
